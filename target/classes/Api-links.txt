@@ -1,0 +1,8 @@
+// Create book
+http://localhost:8102/springhibernateapi/create
+
+// Get all books
+http://localhost:8102/springhibernateapi/getall
+
+// Get book by id
+http://localhost:8102/springhibernateapi/get/1

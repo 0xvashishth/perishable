@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Built-By: vashishth
+Build-Jdk: 17.0.1
+Implementation-Title: Perishables-Website
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: jcg.tutorial
+Implementation-URL: http://maven.apache.org
+Created-By: Maven Integration for Eclipse
+
