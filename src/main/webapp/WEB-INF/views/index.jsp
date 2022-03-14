@@ -58,7 +58,7 @@
                 <div class="navbar-buttons mbr-section-btn"><a class="btn btn-primary display-4" href="/customer/register/show"><span class="mobi-mbri mobi-mbri-login mbr-iconfont mbr-iconfont-btn"></span>Sign in</a></div>
             	<% } else { %>
                 <div class="navbar-buttons mbr-section-btn">
-                	<img src="${pageContext.request.contextPath}/users/${customer.id}.png" class="border-1 border" style="border-radius: 50%; width: 50px; height: 50px;" />
+                	<a href="/customer/customerprofile"><img src="${pageContext.request.contextPath}/users/${customer.id}.png" class="border-1 border" style="border-radius: 50%; width: 50px; height: 50px;" /></a>
                 </div>
                 <a class="btn btn-outline-secondary" href="/customer/logout">Logout</a>
             	<% } %>

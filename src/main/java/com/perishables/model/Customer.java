@@ -21,13 +21,24 @@ public class Customer {
 	private String password;
 	
 	@Column(name="MobileNumber")
-	private String MobNo;
+	private String mobNo;
 	
 	@Column(unique=true)
 	private String email;
 	
 	@Column(name="DateofBirth")
 	private String dob;
+	
+	@Column(name="Address")
+	private String address;
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	public Long getId() {
 		return id;
@@ -45,12 +56,12 @@ public class Customer {
 		this.name = name;
 	}
 
-	public String getMobNo() {
-		return MobNo;
+	public String getmobNo() {
+		return mobNo;
 	}
 
-	public void setMobNo(String secMobNo) {
-		this.MobNo = secMobNo;
+	public void setmobNo(String mobNo) {
+		this.mobNo = mobNo;
 	}
 
 	public String getPassword() {

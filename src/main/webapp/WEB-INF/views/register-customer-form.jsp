@@ -123,6 +123,7 @@
 		<form:password class="input-control form-control my-3" placeholder="Password" path="password" required="true" />
 		<input type="password" placeholder="Confirm Password" class="input-control form-control" name="c_pass" required />
 		<form:input type="email" class="input-control form-control my-3" placeholder="Email" path="email" required="true" />
+		<form:input type="text" class="input-control form-control my-3" placeholder="Address" path="address" required="true" />
 		<form:input type="number" class="input-control form-control my-3" placeholder="Mobile Number" path="mobNo" required="true" />
 		<form:input type="date" class="input-control form-control my-3" placeholder="Date of Birth" path="dob" required="true" />
 		<input type="file" name="c_img" class="input-control form-control my-3" placeholder="Profile Picture" accept="image/png" />

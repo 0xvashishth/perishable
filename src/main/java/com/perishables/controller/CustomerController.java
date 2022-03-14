@@ -47,7 +47,23 @@ public class CustomerController {
 		mv.setViewName("redirect:/");
 		return mv;
 	}
-		
+	
+	@RequestMapping("/customerprofile")
+	public ModelAndView customerprofile(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("customer") != null) {
+			ModelAndView mv = new ModelAndView();
+	//		request.getSession().invalidate();
+			mv.setViewName("userprofile");
+			return mv;
+		}
+		else {
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("redirect:/");
+			return mv;
+		}
+	}
+	
 	@RequestMapping("/register/submit")
 	public ModelAndView registerCustomer(HttpServletRequest request, @ModelAttribute("customer") Customer c, @RequestParam("c_pass") String cpass, @RequestParam("c_img") MultipartFile[] files) {
 		ModelAndView mv = new ModelAndView();
@@ -59,7 +75,7 @@ public class CustomerController {
 			return mv;
 		}
 		
-		if(c.getName() == "" || c.getPassword() == "" || c.getEmail() == "" || c.getMobNo() == "" || c.getDob() == "") {
+		if(c.getName() == "" || c.getAddress() == "" || c.getPassword() == "" || c.getEmail() == "" || c.getmobNo() == "" || c.getDob() == "") {
 			mv.addObject("FieldEmpty", "Some required fields were left empty.");
 			mv.setViewName("register-customer-form");
 			return mv;
