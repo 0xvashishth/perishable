@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: Shrey Naik
+Built-By: vashishth
 Build-Jdk: 17.0.1
 Implementation-Title: Perishables-Website
 Implementation-Version: 0.0.1-SNAPSHOT
