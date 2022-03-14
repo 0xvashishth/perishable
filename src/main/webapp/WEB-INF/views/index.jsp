@@ -60,6 +60,7 @@
                 <div class="navbar-buttons mbr-section-btn">
                 	<img src="${pageContext.request.contextPath}/users/${customer.id}.png" class="border-1 border" style="border-radius: 50%; width: 50px; height: 50px;" />
                 </div>
+                <a class="btn btn-outline-secondary" href="/customer/logout">Logout</a>
             	<% } %>
             </div>
         </div>

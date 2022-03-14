@@ -40,6 +40,14 @@ public class CustomerController {
 		return mv;
 	}
 	
+	@RequestMapping("/logout")
+	public ModelAndView logoutuser(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		request.getSession().invalidate();
+		mv.setViewName("redirect:/");
+		return mv;
+	}
+		
 	@RequestMapping("/register/submit")
 	public ModelAndView registerCustomer(HttpServletRequest request, @ModelAttribute("customer") Customer c, @RequestParam("c_pass") String cpass, @RequestParam("c_img") MultipartFile[] files) {
 		ModelAndView mv = new ModelAndView();
