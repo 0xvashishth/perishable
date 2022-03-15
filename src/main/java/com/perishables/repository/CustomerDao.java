@@ -43,4 +43,31 @@ public class CustomerDao {
 		session.close();
 		return c;
 	}
+	
+	public void delete(Customer c) {
+		Session session = sf.openSession();
+		session.beginTransaction();
+		session.delete(c);
+		session.getTransaction().commit();
+		session.close();
+	}
+	
+//	public void update(Customer c) {
+//		Session session = sf.openSession();
+//		session.beginTransaction();
+//		
+//		@SuppressWarnings("rawtypes")
+//		Query q = session.createQuery("update Customer set name=:name, password=:password, email=:email, dob=:dob, address=:address, mobNo=:mobNo where id=:id");
+//		q.setParameter("name", c.getName());
+//		q.setParameter("password", c.getPassword());
+//		q.setParameter("email", c.getEmail());
+//		q.setParameter("dob", c.getDob());
+//		q.setParameter("address", c.getAddress());
+//		q.setParameter("mobNo", c.getmobNo());
+//		q.setParameter("id", c.getId());
+//		int status = q.executeUpdate();
+//		System.out.println(status);
+//		session.getTransaction().commit();
+//		session.close();
+//	}
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,14 +10,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/web/assets/mobirise-icons2/mobirise2.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/animatecss/animate.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/socicon/css/styles.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/theme/css/style.css">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
+  <link rel="preload" as="style" href="${pageContext.request.contextPath}/assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="${pageContext.request.contextPath}/assets/mobirise/css/mbr-additional.css" type="text/css">
+</head>
 
 <style>
     body{
         margin-top:0px;
         color: #1a202c;
-        text-align: left;
-        background-color: #e2e8f0;    
+        text-align: left; 
     }
     
     .main-body {
@@ -67,16 +79,15 @@
         box-shadow: none!important;
     }
 </style>
-</head>
-<body>
 
+<body class="bg-light">
 
+<%@include file="includes/navbar.jsp" %>
+
+<br><br>
 
 <div class="container">
-<br><br>
-<center>
-<a class="btn btn-outline-primary" href="/"> Home </a>&nbsp;&nbsp;<a class="btn btn-outline-danger" href="/customer/logout"> Logout </a>&nbsp;&nbsp;<a class="btn btn-outline-secondary" href="#"><i class="material-icons">shopping_cart</i></a>
-</center>
+	<h2 class="text-center mt-5">Your Account</h2>
     <div class="main-body ">
     <br><br><br>
           <div class="row gutters-sm">
@@ -84,7 +95,7 @@
               <div class="card shadow p-3 mb-5 bg-white rounded">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                    <img src="${pageContext.request.contextPath}/users/${customer.id}.png" alt="Admin" class="rounded-circle" width="150">
+                    <img src="${pageContext.request.contextPath}/users/${sessionScope.customer.id}.png" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
                       <h4>${sessionScope.customer.name}</h4>
 
@@ -96,70 +107,31 @@
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h5 class="mb-0"><i class="material-icons">email</i></h5>
-                    <span class="text-secondary">${sessionScope.customer.email}</span>
+                    <span class="text-muted">${sessionScope.customer.email}</span>
                   </li>
                 </ul>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h5 class="mb-0"><i class="material-icons">phone</i></h5>
-                    <span class="text-secondary">${sessionScope.customer.mobNo}</span>
+                    <span class="text-muted">${sessionScope.customer.mobNo}</span>
                   </li>
                 </ul>
               </div>
             </div>
+            
             <div class="col-md-8">
               <div class="card mb-3 shadow p-3 mb-5 bg-white rounded">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Full Name</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      ${sessionScope.customer.name}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Email</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        ${sessionScope.customer.email}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Phone</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        ${sessionScope.customer.mobNo}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Date Of Birth</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        ${sessionScope.customer.dob}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Address</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        ${sessionScope.customer.address}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <a class="btn btn-outline-primary" target="__blank" data-bs-toggle="modal" data-bs-target="#editModal">Edit</a>
-                    </div>
-                  </div>
+                  <form:form action="/customer/update/submit" class="mx-auto container" method="POST" enctype="multipart/form-data" modelAttribute="customer">
+                  	<form:input class="input-control form-control my-3" path="name" value="${customer.name}" placeholder="Name" required="true" />
+                  	<form:input class="input-control form-control my-3" type="email" path="email" value="${customer.email}" placeholder="Email" required="true" />
+                  	<form:input class="input-control form-control my-3" type="number" path="mobNo" value="${customer.mobNo}" placeholder="Phone" required="true" />
+                  	<form:input class="input-control form-control my-3" type="password" path="password" value="${customer.password}" placeholder="Password" required="true" />
+                  	<form:input class="input-control form-control my-3" type="date" path="dob" value="${customer.dob}" placeholder="Date Of Birth" required="true" />
+                  	<form:input class="input-control form-control my-3" path="address" value="${customer.address}" placeholder="Address" required="true" />
+                  	<input type="submit" value="Update Details" class="btn btn-primary my-5 float-end"/>
+                  </form:form>
                 </div>
               </div>
 
@@ -228,8 +200,30 @@
       </div>
     </div>
     
+    <div class="modal" id="deleteModal" tabindex="-1">
+	  <div class="modal-dialog" style="height: auto;">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Delete Account</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body text-muted">
+	        <p>Are you sure? Doing so, you will lose all your account details and won't be able to recover your account.</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn" data-bs-dismiss="modal">Revert</button>
+	        <a href="/customer/delete"><button type="button" class="btn btn-secondary">Confirm, Delete</button></a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+    
+    <div class="container text-center">
+    	<button class="btn btn-secondary mx-auto my-5" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete My Account</button>
+    </div>
+</div>
 
-
+<%@include file="includes/footer.jsp" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

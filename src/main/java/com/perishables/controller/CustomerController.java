@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.perishables.model.Customer;
 import com.perishables.repository.CustomerDao;
@@ -64,6 +65,41 @@ public class CustomerController {
 		return mv;
 	}
 	
+	
+	@RequestMapping("/update/submit")
+	public ModelAndView updateAccount(RedirectAttributes rattrs, HttpServletRequest request, @ModelAttribute("customer") Customer c) {
+		ModelAndView mv = new ModelAndView();
+		HttpSession session = request.getSession();
+		if(session.getAttribute("customer") == null) {
+			mv.setViewName("redirect:/");
+			return mv;
+		}
+		
+		if(c.getName() == "" || c.getAddress() == "" || c.getPassword() == "" || c.getEmail() == "" || c.getmobNo() == "" || c.getDob() == "") {
+			rattrs.addAttribute("FieldEmpty", "Some required fields were left empty.");
+			mv.setViewName("redirect:/customer/customerprofile");
+			return mv;
+		}
+		
+//		cDao.update(c);
+		session.setAttribute("customer", c);
+		mv.setViewName("redirect:/customer/customerprofile");
+		return mv;
+	}
+	
+	@RequestMapping("/delete")
+	public ModelAndView deleteAccount(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		HttpSession session = request.getSession();
+		if (session.getAttribute("customer") != null) {
+			Customer c = (Customer)session.getAttribute("customer");
+			cDao.delete(c);
+			session.invalidate();
+		}
+		mv.setViewName("redirect:/");
+		return mv;
+	}
+	
 	@RequestMapping("/register/show")
 	public ModelAndView showRegistrationForm(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
@@ -91,6 +127,7 @@ public class CustomerController {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("customer") != null) {
 			ModelAndView mv = new ModelAndView();
+			mv.addObject("customer", session.getAttribute("customer"));
 	//		request.getSession().invalidate();
 			mv.setViewName("userprofile");
 			return mv;

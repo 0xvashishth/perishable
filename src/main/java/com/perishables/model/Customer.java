@@ -87,4 +87,17 @@ public class Customer {
 	public void setDob(String dob) {
 		this.dob = dob;
 	}
+
+	public Customer() {}
+	
+	public Customer(Customer c) {
+		super();
+		this.id = c.getId();
+		this.name = c.getName();
+		this.password = c.getPassword();
+		this.mobNo = c.getmobNo();
+		this.email = c.getEmail();
+		this.dob = c.getDob();
+		this.address = c.getAddress();
+	}
 }
