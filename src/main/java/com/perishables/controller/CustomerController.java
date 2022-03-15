@@ -1,17 +1,12 @@
 package com.perishables.controller;
 
 import java.io.IOException;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +24,45 @@ import com.perishables.repository.CustomerDao;
 public class CustomerController {
 	@Autowired
 	private CustomerDao cDao;
-	public static String uploadDirectory = System.getProperty("user.dir")+"/src/main/resources/static/users";
+	public static String uploadDirectory;
+	
+	{
+		uploadDirectory = System.getProperty("user.dir")+"/src/main/resources/static/users";
+	}
+	
+	@RequestMapping("/login/show")
+	public ModelAndView showLoginForm(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		HttpSession session = request.getSession();
+		if(session.getAttribute("customer") != null)
+			mv.setViewName("redirect:/");
+		else
+			mv.setViewName("login-customer-form");
+		return mv;
+	}
+	
+	@RequestMapping("/login/submit")
+	public ModelAndView submitLoginForm(HttpServletRequest request, @RequestParam("email") String email, @RequestParam("password") String password) {
+		ModelAndView mv = new ModelAndView();
+		Customer c = cDao.login(email);
+		
+		if(c == null) {
+			mv.addObject("msg", "No such user found!");
+			mv.setViewName("redirect:/customer/login/show");
+			return mv;
+		}
+		
+		if(password.equals(c.getPassword())) {
+			mv.addObject("msg", "Logged in successfully!");
+			HttpSession session = request.getSession();
+			session.setAttribute("customer", c);
+			mv.setViewName("redirect:/");
+		} else {
+			mv.addObject("msg", "Password is incorrect!");
+			mv.setViewName("redirect:/customer/login/show");
+		}
+		return mv;
+	}
 	
 	@RequestMapping("/register/show")
 	public ModelAndView showRegistrationForm() {

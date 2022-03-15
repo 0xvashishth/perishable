@@ -69,6 +69,9 @@
 </style>
 </head>
 <body>
+
+<%@include file="/WEB-INF/views/includes/navbar.jsp" %>
+
 <div class="container">
 <br><br>
 <center>
@@ -224,6 +227,8 @@
         </div>
       </div>
     </div>
+    
+<%@include file="/WEB-INF/views/includes/footer.jsp" %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
