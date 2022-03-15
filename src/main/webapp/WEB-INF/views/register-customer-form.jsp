@@ -28,6 +28,7 @@
   
 <%@include file="/WEB-INF/views/includes/navbar.jsp" %>
 
+
 <section data-bs-version="5.1" class="content4 cid-sZRVizn1Ss" id="content4-i">
     
     
@@ -98,6 +99,8 @@
 		<form:input type="date" class="input-control form-control my-3" placeholder="Date of Birth" path="dob" required="true" />
 		<input type="file" name="c_img" class="input-control form-control my-3" placeholder="Profile Picture" accept="image/png" />
 		<input type="submit" class="btn btn-primary my-3 float-end" value="Register" />
+		<br>
+<a href="/customer/login/show">Already Have An Account ?</a>
 </form:form>
 
 <%@include file="/WEB-INF/views/includes/footer.jsp" %>

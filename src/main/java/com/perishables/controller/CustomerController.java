@@ -65,11 +65,16 @@ public class CustomerController {
 	}
 	
 	@RequestMapping("/register/show")
-	public ModelAndView showRegistrationForm() {
+	public ModelAndView showRegistrationForm(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
-		Customer c = new Customer();
-		mv.addObject("customer", c);
-		mv.setViewName("register-customer-form");
+		HttpSession session = request.getSession();
+		if(session.getAttribute("customer") != null)
+			mv.setViewName("redirect:/");
+		else {
+			mv.setViewName("register-customer-form");
+			Customer c = new Customer();
+			mv.addObject("customer", c);
+		}
 		return mv;
 	}
 	

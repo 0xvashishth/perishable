@@ -70,18 +70,18 @@
 </head>
 <body>
 
-<%@include file="/WEB-INF/views/includes/navbar.jsp" %>
+
 
 <div class="container">
 <br><br>
 <center>
-<a class="btn btn-outline-primary" href="/"> Home </a>&nbsp;&nbsp;<a class="btn btn-outline-danger" href="/customer/logout"> Logout </a>
+<a class="btn btn-outline-primary" href="/"> Home </a>&nbsp;&nbsp;<a class="btn btn-outline-danger" href="/customer/logout"> Logout </a>&nbsp;&nbsp;<a class="btn btn-outline-secondary" href="#"><i class="material-icons">shopping_cart</i></a>
 </center>
-    <div class="main-body">
+    <div class="main-body ">
     <br><br><br>
           <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
-              <div class="card">
+              <div class="card shadow p-3 mb-5 bg-white rounded">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
                     <img src="${pageContext.request.contextPath}/users/${customer.id}.png" alt="Admin" class="rounded-circle" width="150">
@@ -92,7 +92,7 @@
                   </div>
                 </div>
               </div>
-              <div class="card mt-3">
+              <div class="card mt-3 shadow p-3 mb-5 bg-white rounded">
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h5 class="mb-0"><i class="material-icons">email</i></h5>
@@ -108,7 +108,7 @@
               </div>
             </div>
             <div class="col-md-8">
-              <div class="card mb-3">
+              <div class="card mb-3 shadow p-3 mb-5 bg-white rounded">
                 <div class="card-body">
                   <div class="row">
                     <div class="col-sm-3">
@@ -157,7 +157,7 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-12">
-                      <a class="btn btn-info " target="__blank" data-bs-toggle="modal" data-bs-target="#editModal">Edit</a>
+                      <a class="btn btn-outline-primary" target="__blank" data-bs-toggle="modal" data-bs-target="#editModal">Edit</a>
                     </div>
                   </div>
                 </div>
@@ -165,7 +165,7 @@
 
               <div class="row gutters-sm">
                 <div class="col-sm-6 mb-3">
-                  <div class="card h-100">
+                  <div class="card h-100 shadow p-3 mb-5 bg-white rounded">
                     <div class="card-body">
                       <h6 class="d-flex align-items-center mb-3">Records&nbsp;<a href="#">Link</a></h6>
                       
@@ -173,7 +173,7 @@
                   </div>
                 </div>
                 <div class="col-sm-6 mb-3">
-                  <div class="card h-100">
+                  <div class="card h-100 shadow p-3 mb-5 bg-white rounded">
                     <div class="card-body">
                       <h6 class="d-flex align-items-center mb-3">CustomerData&nbsp;<a href="#">Link</a></h6>
                       
@@ -228,7 +228,7 @@
       </div>
     </div>
     
-<%@include file="/WEB-INF/views/includes/footer.jsp" %>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>

@@ -23,12 +23,12 @@
                     </li></ul>
             
             	<% if(session.getAttribute("customer") == null) { %>    
-                <div class="navbar-buttons mbr-section-btn"><a class="btn btn-primary display-4" href="/customer/login/show"><span class="mobi-mbri mobi-mbri-login mbr-iconfont mbr-iconfont-btn"></span>Sign in</a></div>
+                <div class="navbar-buttons mbr-section-btn"><a class="btn btn-primary display-4" id="loginlogout" href="/customer/login/show"><span class="mobi-mbri mobi-mbri-login mbr-iconfont mbr-iconfont-btn"></span>Sign in</a></div>
             	<% } else { %>
                 <div class="navbar-buttons mbr-section-btn">
                 	<a href="/customer/customerprofile"><img src="${pageContext.request.contextPath}/users/${customer.id}.png" class="border-1 border" style="border-radius: 50%; width: 50px; height: 50px;" /></a>
                 </div>
-                <div class="navbar-buttons mbr-section-btn"><a class="btn btn-secondary display-4" href="/customer/logout"><span class="mobi-mbri mobi-mbri-logout mbr-iconfont mbr-iconfont-btn"></span>Sign out</a></div>
+                <div class="navbar-buttons mbr-section-btn"><a class="btn btn-secondary display-4" id="loginlogout" href="/customer/logout"><span class="mobi-mbri mobi-mbri-logout mbr-iconfont mbr-iconfont-btn"></span>Sign out</a></div>
             	<% } %>
             </div>
         </div>

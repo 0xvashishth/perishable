@@ -27,7 +27,10 @@
 <body>
   
 <%@include file="/WEB-INF/views/includes/navbar.jsp" %>
-
+<script type="text/javascript">
+document.getElementById("loginlogout").innerHTML = "Register"
+    document.getElementById("loginlogout").href = "/customer/register/show"
+</script>
 <div class="my-5">&nbsp;</div>
 <section data-bs-version="5.1" class="content4 my-5 container cid-sZRVizn1Ss border border-1 p-md-5 p-sm-3 p-2" id="content4-i">
     <div class="container">
@@ -47,6 +50,8 @@
 	<input type="password" name="password" class="input-control form-control my-3" placeholder="Password" required />
 	<input type="submit" class="btn btn-primary float-end mb-5" value="Login" />
 </form>
+<br><br>
+<a href="/customer/register/show">Want To Create An Account ?</a>
 </div>
 </section>
 
