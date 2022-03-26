@@ -83,7 +83,7 @@
 
 <body class="bg-light">
 
-<%@include file="includes/navbar.jsp" %>
+<%@include file="../includes/navbar.jsp" %>
 
 <br><br>
 
@@ -111,12 +111,6 @@
                     <span class="text-muted">${sessionScope.user.email}</span>
                   </li>
                 </ul>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                    <h5 class="mb-0"><i class="material-icons">phone</i></h5>
-                    <span class="text-muted">${sessionScope.user.mobNo}</span>
-                  </li>
-                </ul>
               </div>
             </div>
             
@@ -124,16 +118,13 @@
               <div class="card mb-3 shadow p-3 mb-5 bg-white rounded">
                 <div class="card-body">
                   <div class="row">
-                  <form:form action="/customer/update/submit" class="mx-auto container" method="POST" enctype="multipart/form-data" modelAttribute="customer">
-					<form:hidden path="id" value="${customer.id}" />
-					<form:hidden path="userType" value="${customer.userType}" />
+                  <form:form action="/customer/updateAdmin/submit" class="mx-auto container" method="POST" enctype="multipart/form-data" modelAttribute="admin">
+					<form:hidden path="id" value="${admin.id}" />
+					<form:hidden path="userType" value="${admin.userType}" />
 					<input type="file" name="u_pic" accept="image/*" class="form-control input-control my-3" />
-                  	<form:input class="input-control form-control my-3" path="name" value="${customer.name}" placeholder="Name" required="true" />
-                  	<form:input class="input-control form-control my-3" type="email" path="email" value="${customer.email}" placeholder="Email" required="true" />
-                  	<form:input class="input-control form-control my-3" type="number" path="mobNo" value="${customer.mobNo}" placeholder="Phone" required="true" />
-                  	<form:input class="input-control form-control my-3" type="date" path="dob" value="${customer.dob}" placeholder="Date Of Birth" required="true" />
-                  	<form:input class="input-control form-control my-3" path="address" value="${customer.address}" placeholder="Address" required="true" />                  	
-                  	<form:input class="input-control form-control my-3" type="password" path="password" value="${customer.password}" placeholder="Password" required="true" />
+                  	<form:input class="input-control form-control my-3" path="name" value="${admin.name}" placeholder="Name" required="true" />
+                  	<form:input class="input-control form-control my-3" type="email" path="email" value="${admin.email}" placeholder="Email" required="true" />                 	
+                  	<form:input class="input-control form-control my-3" type="password" path="password" value="${admin.password}" placeholder="Password" required="true" />
                   	<input type="submit" value="Update Details" style="border-radius: 100px;" class="btn btn-primary my-5 float-end"/>
                   </form:form>
                 </div>
@@ -165,44 +156,6 @@
 
         </div>
     </div>
-
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Edit Your Details</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form>
-              
-              <div class="mb-3">
-                <label for="edit-fname" class="col-form-label">Edit First Name:</label>
-                <input type="text" name="efname" class="form-control" id="edit-fname" value="${sessionScope.user.name}" required>
-              </div>
-              <div class="mb-3">
-                <label for="edit-phone" class="col-form-label">Edit Phone Number:</label>
-                <input type="text" name="ephone" class="form-control" value="${sessionScope.user.mobNo}" id="edit-phone" required>
-              </div>
-              <div class="mb-3">
-                <label for="edit-address" class="col-form-label">Edit Address:</label>
-                <input type="text" name="eaddress" class="form-control" value="${sessionScope.user.email}" id="edit-address" required>
-              </div>
-               <div class="mb-3">
-                <label for="address" class="col-form-label">Address:</label>
-                <input type="text" name="address" class="form-control" value="${sessionScope.user.address}" id="address" required>
-              </div>
-          </div>
-          <div id="editdata"></div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <input type="submit" onclick="onedit()" class="btn btn-primary">
-          </div>
-          
-          </form>
-        </div>
-      </div>
-    </div>
     
     <div class="modal" id="deleteModal" tabindex="-1">
 	  <div class="modal-dialog" style="height: auto;">
@@ -227,7 +180,7 @@
     </div>
 </div>
 
-<%@include file="includes/footer.jsp" %>
+<%@include file="../includes/footer.jsp" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

@@ -1,5 +1,6 @@
 package com.perishables.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.perishables.model.Customer;
+import com.perishables.model.User;
 import com.perishables.repository.CustomerDao;
 
 @Controller
@@ -45,7 +48,7 @@ public class CustomerController {
 	@RequestMapping("/login/submit")
 	public ModelAndView submitLoginForm(HttpServletRequest request, @RequestParam("email") String email, @RequestParam("password") String password) {
 		ModelAndView mv = new ModelAndView();
-		Customer c = cDao.login(email);
+		User c = cDao.login(email);
 		
 		if(c == null) {
 			mv.addObject("msg", "No such user found!");
@@ -56,7 +59,7 @@ public class CustomerController {
 		if(password.equals(c.getPassword())) {
 			mv.addObject("msg", "Logged in successfully!");
 			HttpSession session = request.getSession();
-			session.setAttribute("customer", c);
+			session.setAttribute("user", c);		
 			mv.setViewName("redirect:/");
 		} else {
 			mv.addObject("msg", "Password is incorrect!");
@@ -67,10 +70,10 @@ public class CustomerController {
 	
 	
 	@RequestMapping("/update/submit")
-	public ModelAndView updateAccount(RedirectAttributes rattrs, HttpServletRequest request, @ModelAttribute("customer") Customer c) {
+	public ModelAndView updateCustomerAccount(RedirectAttributes rattrs, HttpServletRequest request, @ModelAttribute("customer") Customer c, @RequestParam("u_pic") MultipartFile[] files) {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
-		if(session.getAttribute("customer") == null) {
+		if(session.getAttribute("user") == null) {
 			mv.setViewName("redirect:/");
 			return mv;
 		}
@@ -81,8 +84,25 @@ public class CustomerController {
 			return mv;
 		}
 		
-//		cDao.update(c);
-		session.setAttribute("customer", c);
+		cDao.update(c);
+		
+//		Update the profile picture
+		StringBuilder fileNames = new StringBuilder();
+		String fileName = "" + c.getId() + ".png";
+		for(MultipartFile file : files) {
+			Path fileNameAndPath = Paths.get(uploadDirectory,fileName);
+			fileNames.append(fileName);
+			try {
+				Files.write(fileNameAndPath, file.getBytes());
+				System.out.println("Successfully files " + fileNames.toString());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		session.setAttribute("user", c);
+		session.setAttribute("userType", "Customer");
 		mv.setViewName("redirect:/customer/customerprofile");
 		return mv;
 	}
@@ -94,8 +114,20 @@ public class CustomerController {
 		if (session.getAttribute("customer") != null) {
 			Customer c = (Customer)session.getAttribute("customer");
 			cDao.delete(c);
+			
+			// Delete user profile image
+			ClassPathResource resource = new ClassPathResource("/static/users/" + c.getId() + ".png");
+			try {
+				System.out.println(resource.getFile().getAbsolutePath());
+				boolean status= resource.getFile().delete();
+				System.out.println(status);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			session.invalidate();
 		}
+		
 		mv.setViewName("redirect:/");
 		return mv;
 	}
@@ -125,11 +157,18 @@ public class CustomerController {
 	@RequestMapping("/customerprofile")
 	public ModelAndView customerprofile(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("customer") != null) {
+		if(session.getAttribute("user") != null) {
 			ModelAndView mv = new ModelAndView();
-			mv.addObject("customer", session.getAttribute("customer"));
 	//		request.getSession().invalidate();
-			mv.setViewName("userprofile");
+			User u = (User)session.getAttribute("user");
+			if(u.getUserType().equals("Admin")) {
+				mv.setViewName("admin/adminProfile");
+				mv.addObject("admin", session.getAttribute("user"));
+			}
+			else {
+				mv.setViewName("userprofile");
+				mv.addObject("customer", session.getAttribute("user"));
+			}
 			return mv;
 		}
 		else {
@@ -156,11 +195,15 @@ public class CustomerController {
 			return mv;
 		}
 		
+//		Determine the type of user (default is customer)
+		c.setUserType("Customer");
+		
 //		If the details are valid, then create the user account
 		cDao.save(c);
 //		Start the user session
 		HttpSession session = request.getSession();
-		session.setAttribute("customer", c);
+		session.setAttribute("user", c);
+		session.setAttribute("userType", "Customer");
 		
 //		Save the user image
 //		Part filePart;
