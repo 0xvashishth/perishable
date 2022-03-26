@@ -1,12 +1,21 @@
 package com.perishables.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="PERISHABLES")
 public class Perishables extends Product {
 	private String bestBefore;
+	
+	public Perishables(Perishables p) { 
+		super((Product)p);
+		this.bestBefore = p.bestBefore;
+	}
 
 	public String getBestBefore() {
 		return bestBefore;

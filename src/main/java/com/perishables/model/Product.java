@@ -1,5 +1,10 @@
 package com.perishables.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="PRODUCT")
@@ -76,6 +82,16 @@ public class Product {
 		this.discount = discount;
 		this.type = type;
 		this.quantity = quantity;
+	}
+	
+	public Product(Product p) {
+		this.id = p.getId();
+		this.name = p.getName();
+		this.description = p.getDescription();
+		this.price = p.getPrice();
+		this.discount = p.getDiscount();
+		this.type = p.getType();
+		this.quantity = p.getQuantity();
 	}
 	
 	public Product() {

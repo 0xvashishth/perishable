@@ -18,15 +18,18 @@ import com.perishables.model.Perishables;
 import com.perishables.model.Product;
 import com.perishables.model.User;
 import com.perishables.repository.CustomerDao;
+import com.perishables.repository.ProductDao;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 	@Autowired
 	private CustomerDao cDao;
+	@Autowired
+	private ProductDao pDao;
 	
 	@RequestMapping("/dashboard")
-	public ModelAndView dashboard(HttpServletRequest request, @RequestParam("u_string") Optional<String> search) {
+	public ModelAndView dashboard(HttpServletRequest request, @RequestParam("u_string") Optional<String> search, @RequestParam("u_string_p") Optional<String> searchP) {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
@@ -34,8 +37,8 @@ public class AdminController {
 			mv.setViewName("redirect:/");
 		} else {
 //			Add product form
-			Product p = new Perishables();
-			mv.addObject("product", p);
+			Perishables p = new Perishables();
+			mv.addObject("perishable", p);
 
 			mv.addObject("admin", user);
 			mv.setViewName("admin/adminPanel");
@@ -45,6 +48,14 @@ public class AdminController {
 			} else {
 				Set<Customer> clist = cDao.find(null, 25);
 				mv.addObject("clist", clist);
+			} 
+			
+			if(searchP.isPresent()) {
+				Set<Product> pList = pDao.find(searchP.get(), 25);
+				mv.addObject("pList", pList);
+			} else {
+				Set<Product> pList = pDao.find(null, 25);
+				mv.addObject("pList", pList);
 			}
 		}
 		return mv;

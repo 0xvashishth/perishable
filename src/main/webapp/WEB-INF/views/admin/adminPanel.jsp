@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@page import="com.perishables.model.User, com.perishables.model.Customer, java.util.List, java.util.Set" %>
+    <%@page import="com.perishables.model.*, java.util.List, java.util.Set" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <!DOCTYPE html>
 <html>
@@ -160,7 +160,7 @@
 		<div class="card col-12 col-md-6 p-0 mt-3 px-3 mt-md-0" style="border-radius: 25px;">
 		  <div class="bg-success pb-5" alt="...">
 		  	<form class="form my-5 d-block mx-auto">
-		  		<input type="search" placeholder="Search product by id, name" class="input-control d-block mx-auto w-75 form-control" name="u_string" />
+		  		<input type="search" placeholder="Search product by type, name" class="input-control d-block mx-auto w-75 form-control" name="u_string_p" />
 		  		<input type="submit" class="d-none" value="Search" />
 		  	</form>
 		  </div>
@@ -174,9 +174,57 @@
 		    			<th>Name</th>
 		    			<th>Type</th>
 		    		</tr>
+		    		<% Set<Product> pList = (Set<Product>)request.getAttribute("pList");
+		    			if(pList != null) {
+		    			for(Product p : pList) { %>
+		    			<tr id="product-<%= p.getId() %>">
+    						<td><%= p.getId() %></td>
+    						<td><%= p.getName() %></td>
+   							<td><%= p.getType() %>
+   								<a onclick="setProduct(<%= p.getId() %>)" role="button" data-bs-toggle="modal" data-bs-target="#productDeleteModal"><span class="mobi-mbri mobi-mbri-trash text-secondary float-end mbr-iconfont mbr-iconfont-btn"></span></a>
+   								<a data-bs-toggle="collapse" data-bs-target="#full-product-<%= p.getId()%>"><span class="mobi-mbri px-3 mobi-mbri-arrow-down text-muted float-end mbr-iconfont mbr-iconfont-btn"></span></a>
+   							</td>
+    					</tr>
+    					<tr style="background-color: #def4ff;" class="collapse" id="full-product-<%= p.getId() %>">
+    						<td colspan="3">
+    						<div class="d-flex">
+	    						<div class="mx-2">
+	    							<img src="${pageContext.request.contextPath}/products/<%= p.getId() %>.png" class="float-end" style="width: 100px;" />
+	    						</div>
+	    						<div>
+	    							<p>Description: <%= p.getDescription() %></p>
+	    							<p>Discount: <%= p.getDiscount() %></p>
+	    							<p>Price: <%= p.getPrice() %></p>
+	    							<p>Quantity: <%= p.getQuantity() %></p>
+	   							</div>
+    						</div>
+    						</td>
+    					</tr>
+   					<% }} %>
 		    	</table>
 		    </div>
 		  </div>
+		    
+		    <div class="modal" id="productDeleteModal" tabindex="-1">
+			  <div class="modal-dialog" style="height: auto;">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title">Delete Product</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        <p style="line-height: 1.5;">Are you sure, you want to delete this product? You won't be able to undo the changes.</p>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn" data-bs-dismiss="modal">Revert</button>
+			        <form action="/product/delete">
+				        <input id="product_deletion_id" name="id" type="hidden" value="0" />
+				        <input type="submit" class="btn btn-secondary" style="border-radius: 100px;" value="Delete" />
+			        </form>
+			      </div>
+			    </div>
+			  </div>
+			</div>
 		</div>
 	</div>
 </section>
@@ -189,14 +237,22 @@
 		<h2 class="d-inline-block">Add A Product</h2>
 		<button class="btn btn-close float-end" onclick="hideProductAdder()" style="transform:translateY(-15px);"></button>
 	
-		<form:form modelAttribute="product" method="POST" enctype="multipart/form-data" class="container">
-			<input type="file" name="productPic" class="form-control input-control" />
-			<form:input path="name" class="form-control input-control my-3" placeholder="Name" />
-			<form:textarea path="description" class="form-control input-control my-3" placeholder="Description" />
-			<form:input type="number" min="0" path="price" class="form-control input-control my-3" placeholder="Price" />
-			<form:input type="number" path="discount" min="0" max="100" class="form-control input-control my-3" placeholder="Discount" />
-			<form:input type="number" min="1" path="quantity" class="form-control input-control my-3" placeholder="Quantity Available" />
-			<form:input path="type" class="form-control input-control my-3" placeholder="Type of Product" />
+		<form:form action="/product/create" modelAttribute="perishable" method="POST" enctype="multipart/form-data" class="container">
+			<input type="file" accept="image/*" name="p_img" class="form-control input-control" required />
+			<form:input path="name" class="form-control input-control my-3" placeholder="Name" required="true" />
+			<form:textarea path="description" class="form-control input-control my-3" placeholder="Description" required="true" />
+			<input type="number" min="0" value="${null}" name="price" class="form-control input-control my-3" placeholder="Price" required />
+			<input type="number" name="discount" min="0" value="" max="100" class="form-control input-control my-3" placeholder="Discount" required />
+			<input type="number" min="1" name="quantity" value="" class="form-control input-control my-3" placeholder="Quantity Available" required />
+			<form:select id="typeOfProduct" onchange="displayer()" path="type" class="form-control input-control my-3" required="true">
+				<form:option value="Fruits">Fruit</form:option>
+				<form:option value="Vegetables">Vegetable</form:option>
+				<form:option value="Oil">Oil</form:option>
+				<form:option value="Meat">Meat</form:option>
+				<form:option value="Dairy">Dairy</form:option>
+			</form:select>
+			<form:input path="bestBefore" class="form-control input-control my-3" placeholder="Best Before" required="true" />
+			<input id="items" type="number" min="1" name="itemsPerPack" class="input-control form-control my-3" placeholder="(items) per pack" required />
 			<input type="submit" value="Create" class="btn btn-primary float-end px-4" style="border-radius: 100px;" />
 		</form:form>
 	</div>
@@ -212,6 +268,10 @@
 		document.getElementById("user_deletion_id").value = id;
 	}
 	
+	function setProduct(id) {
+		document.getElementById("product_deletion_id").value = id;
+	}
+	
 	function hideProductAdder() {
 		let pAdder = document.getElementById("product-adder");
 		pAdder.style.animation = "0.5s fadeOutRight forwards";
@@ -222,6 +282,18 @@
 		let pAdder = document.getElementById("product-adder");
 		pAdder.classList.remove("d-none");
 		pAdder.style.animation = "0.5s fadeInRight forwards";
+	}
+	
+	let x = document.getElementById("typeOfProduct");
+	let y = document.getElementById("items");
+	function displayer() {
+		if(x.value == "Fruits" || x.value == 'Vegetables') {
+			y.setAttribute("placeholder", "(items) per pack");
+		} else if (x.value == "Dairy" || x.value == "Oil") {
+			y.setAttribute("placeholder", "(ml) per pack");
+		} else {
+			y.setAttribute("placeholder", "(grams) per pack");
+		}
 	}
 </script>
 </body>

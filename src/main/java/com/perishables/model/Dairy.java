@@ -8,6 +8,12 @@ import javax.persistence.Table;
 public class Dairy extends Perishables {
 	private float millilitresPerItem;
 	
+	public Dairy() {
+		super();
+	}
+	
+	public Dairy(Perishables p) { super(p); }
+	
 	public float getMillilitresPerItem() {
 		return millilitresPerItem;
 	}

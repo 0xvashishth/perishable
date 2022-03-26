@@ -7,6 +7,10 @@ import javax.persistence.Table;
 @Table(name="VEGETABLES")
 public class Vegetables extends Perishables {
 	private int itemsPerPack;
+	
+	public Vegetables() {}
+	
+	public Vegetables(Perishables p) { super(p); }
 
 	public int getItemsPerPack() {
 		return itemsPerPack;

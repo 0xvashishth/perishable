@@ -7,6 +7,12 @@ import javax.persistence.Table;
 @Table(name="MEAT")
 public class Meat extends Perishables {
 	private float gramsPerItem;
+	
+	public Meat() {
+		super();
+	}
+
+	public Meat(Perishables p) { super(p); }
 
 	public float getGramsPerItem() {
 		return gramsPerItem;

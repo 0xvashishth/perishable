@@ -8,6 +8,12 @@ import javax.persistence.Table;
 public class Fruits extends Perishables {
 	private int itemsPerPack;
 	
+	public Fruits() {
+		super();
+	}
+	
+	public Fruits(Perishables p) { super(p); }
+	
 	public int getItemsPerPack() {
 		return itemsPerPack;
 	}
