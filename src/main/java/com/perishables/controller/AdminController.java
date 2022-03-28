@@ -51,10 +51,10 @@ public class AdminController {
 			} 
 			
 			if(searchP.isPresent()) {
-				Set<Product> pList = pDao.find(searchP.get(), 25);
+				Set<Perishables> pList = pDao.find(searchP.get(), 25);
 				mv.addObject("pList", pList);
 			} else {
-				Set<Product> pList = pDao.find(null, 25);
+				Set<Perishables> pList = pDao.find(null, 25);
 				mv.addObject("pList", pList);
 			}
 		}
