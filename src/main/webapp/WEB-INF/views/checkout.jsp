@@ -82,6 +82,7 @@
 	<div class="text-end"><mark>
 	<b>Grand Total :-</b>
 	<%= G_total %>
+	<% session.setAttribute("G_total", G_total); %>
 	</mark>
 	<br>
 	</div>
@@ -94,8 +95,8 @@
 						
 <section id="form" class="col-12 col-sm-8 p-3 border my-5 d-none col-md-6 mx-auto" style="min-height: 75vh; border-radius: 25px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
 		<h3 class="text-center">Fill up the details</h3>
-		<form action="submit" id="form" method="post" class="form my-3">
-		Address : <textarea class="form-control input-control my-3" type="text" name="checkout_address" required></textarea>
+		<form action="submit" id="my-form" method="post" class="form my-3">
+		Address : <input type="text" class="form-control input-control my-3" name="checkout_address" required />
 		ATM Card Number : <input type="text" class="form-control input-control my-3" placeholder="XXXX - XXXX - XXXX - XXXX" name="checkout_atm_no" required/><br>
 		3-digit CVV : <input type="number" placeholder="XXX" min="0" class="form-control input-control my-3" name="checkout_atm_cvv" required/><br>
 		<input class="btn btn-primary float-end my-3" type="button" data-bs-toggle="modal" data-bs-target="#paymentModal"  value="Pay" style="border-radius: 100px;" />
@@ -116,7 +117,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn text-muted" data-bs-dismiss="modal">Home</button>
-	        <a href="submit" type="button" id="form-submit" class="btn btn-primary">Receive My Bill</a>
+	        <button type="submit" form="my-form" id="form-submit" class="btn btn-primary">Receive My Bill</button>
 	      </div>
 	    </div>
 	  </div>
@@ -140,9 +141,7 @@
   		
   		let subBtn = document.getElementById("form-submit");
   		let form1 = document.getElementById("form");
-  		subBtn.addEventListener("click", () => {
-  			form1.submit();
-  		});
+	
   </script>
 </body>
 </html>
