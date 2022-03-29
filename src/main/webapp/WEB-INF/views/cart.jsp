@@ -48,9 +48,27 @@
             </div>
         </div>
     </div>
-    
     <a href="/checkout/" class="btn btn-primary d-block mx-auto" style="border-radius: 100px;">Proceed to checkout</a>
+    <button class="btn btn-primary d-block mx-auto" style="border-radius: 100px;" data-bs-toggle="modal" data-bs-target="#paymentModal">Proceed to checkout</button>
     
+   	<div id="paymentModal" class="modal" tabindex="-1">
+	  <div class="modal-dialog" style="height:auto;">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Proceed to Checkout</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <p style="line-height:1.5">Are you sure you wish to purchase all the products in your shopping cart? By clicking next, you will be redirected to the payment gateway.</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn text-secondary" data-bs-dismiss="modal">Back To Cart</button>
+	        <button type="button" class="btn btn-primary">Yes, I'm sure</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
     <section data-bs-version="5.1" class="slider4 mbr-embla cid-t1g1xJyXGa" id="slider4-s"> 
         <div class="position-relative text-center">
     		<div class="container-fluid">
@@ -154,9 +172,6 @@
     	let y = document.getElementsByClassName("itemwhole");
     	for(let i=0; i < x.length; i++) {
     		x[i].addEventListener("click", () => {
-    			x[i].disabled = true;
-    			x[i].classList.remove("btn-primary");
-    			x[i].classList.add("btn-muted");
 				x[i].parentElement.parentElement.parentElement.style.display = "none";
     			
     			req = new XMLHttpRequest();
@@ -170,8 +185,6 @@
     			gtotal.innerHTML = parseFloat(gtotal.textContent)-parseFloat(dataprice[i].textContent);
     			console.log(parseFloat(dataprice[i].textContent));
     			console.log("Removed");
-    			
-    			x[i].remove();
     		});
     	}
     </script>

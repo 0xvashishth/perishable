@@ -189,8 +189,8 @@ public class CustomerController {
 		ModelAndView mv = new ModelAndView();
 		
 		HttpSession session = request.getSession();
-		Customer cust = (Customer)session.getAttribute("user");
-		if(session.getAttribute("cart") != null) {
+		User cust = (User)session.getAttribute("user");
+		if(session.getAttribute("cart") != null && cust != null) {
 			HashMap<Long, Integer> mp = (HashMap<Long, Integer>)session.getAttribute("cart");
 			if(!mp.isEmpty()) {
 				Cookie c = new Cookie("" + cust.getId(), "");
