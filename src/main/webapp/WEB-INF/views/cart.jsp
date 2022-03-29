@@ -48,7 +48,6 @@
             </div>
         </div>
     </div>
-    
     <button class="btn btn-primary d-block mx-auto" style="border-radius: 100px;" data-bs-toggle="modal" data-bs-target="#paymentModal">Proceed to checkout</button>
     
    	<div id="paymentModal" class="modal" tabindex="-1">
@@ -63,12 +62,12 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn text-secondary" data-bs-dismiss="modal">Back To Cart</button>
-	        <button type="button" class="btn btn-primary">Yes, I'm sure</button>
+	        <a href="/checkout/" type="button" class="btn btn-primary">Yes, I'm sure</a>
 	      </div>
 	    </div>
 	  </div>
 	</div>
-    
+
     <section data-bs-version="5.1" class="slider4 mbr-embla cid-t1g1xJyXGa" id="slider4-s"> 
         <div class="position-relative text-center">
     		<div class="container-fluid">
@@ -123,7 +122,6 @@
 </section>
 
 <%@include file="/WEB-INF/views/includes/footer.jsp" %>
-
 <section style="background-color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; color:#aaa; font-size:12px; padding: 0; align-items: center; display: flex;"><a href="https://mobirise.site/c" style="flex: 1 1; height: 3rem; padding-left: 1rem;"></a><p style="flex: 0 0 auto; margin:0; padding-right:1rem;">Website was <a href="https://mobirise.site/g" style="color:#aaa;">designed</a> with Mobirise</p></section><script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="${pageContext.request.contextPath}/assets/smoothscroll/smooth-scroll.js"></script>  <script src="${pageContext.request.contextPath}/assets/ytplayer/index.js"></script>  <script src="${pageContext.request.contextPath}/assets/dropdown/js/navbar-dropdown.js"></script>  <script src="${pageContext.request.contextPath}/assets/embla/embla.min.js"></script>  <script src="${pageContext.request.contextPath}/assets/embla/script.js"></script>  <script src="${pageContext.request.contextPath}/assets/theme/js/script.js"></script>  
 
   
