@@ -48,7 +48,6 @@
             </div>
         </div>
     </div>
-    <a href="/checkout/" class="btn btn-primary d-block mx-auto" style="border-radius: 100px;">Proceed to checkout</a>
     <button class="btn btn-primary d-block mx-auto" style="border-radius: 100px;" data-bs-toggle="modal" data-bs-target="#paymentModal">Proceed to checkout</button>
     
    	<div id="paymentModal" class="modal" tabindex="-1">
@@ -63,7 +62,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn text-secondary" data-bs-dismiss="modal">Back To Cart</button>
-	        <button type="button" class="btn btn-primary">Yes, I'm sure</button>
+	        <a href="/checkout/" type="button" class="btn btn-primary">Yes, I'm sure</a>
 	      </div>
 	    </div>
 	  </div>

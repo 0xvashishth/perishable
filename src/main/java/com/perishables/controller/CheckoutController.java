@@ -19,9 +19,9 @@ public class CheckoutController {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
 		if(session.getAttribute("customer") != null)
-			mv.setViewName("checkout");
-		else
 			mv.setViewName("redirect:/");
+		else
+			mv.setViewName("checkout");
 		return mv;
 	}
 }
