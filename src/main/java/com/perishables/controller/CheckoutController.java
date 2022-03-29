@@ -54,7 +54,7 @@ public class CheckoutController {
 		return mv;
 	}
 	
-	@RequestMapping("submit")
+	@RequestMapping("/submit")
 	public ModelAndView submitcheckout(HttpServletRequest request, @ModelAttribute("customer") Customer c) {
 		String address = request.getParameter("checkout_address");
 		
