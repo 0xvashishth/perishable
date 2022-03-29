@@ -54,4 +54,8 @@ public class orderItems {
 		this.product = product;
 		this.quantity = quantity;
 	}
+	public orderItems() {
+		// TODO Auto-generated constructor stub
+	}
+
 }

@@ -56,6 +56,7 @@
 </table>
 Grand Total :-
 <%= G_total %>
+<%session.setAttribute("G_total", G_total); %>
 <br><br><hr>
 <form action="submit" method="post">
 Address : <input type="text" name="checkout_address" required/><br>

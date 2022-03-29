@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
@@ -49,6 +50,7 @@ public class orders {
 	public Date getOrder_date() {
 		return order_date;
 	}
+	
 	public void setOrder_date(Date order_date) {
 		this.order_date = order_date;
 	}
@@ -68,6 +70,9 @@ public class orders {
 		this.order_date = order_date;
 		this.balanceStatus = balanceStatus;
 		this.deliveryAddress = deliveryAddress;
+	}
+	public orders() {
+		// TODO Auto-generated constructor stub
 	}
 
 }
