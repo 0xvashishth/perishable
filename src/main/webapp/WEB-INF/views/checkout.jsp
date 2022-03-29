@@ -138,9 +138,6 @@
   			confirm.classList.remove("d-none");
   			form.classList.add("d-none");
   		});
-  		
-  		let subBtn = document.getElementById("form-submit");
-  		let form1 = document.getElementById("form");
 	
   </script>
 </body>
