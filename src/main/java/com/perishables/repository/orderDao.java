@@ -20,4 +20,13 @@ public class orderDao {
 		session.close();
 		return id;
 	}
+	
+	public orders getById(Long id) {
+		Session session = sf.openSession();
+		session.beginTransaction();
+		orders o = (orders)session.get(orders.class, id);
+		session.getTransaction().commit();
+		session.close();
+		return o;
+	}
 }

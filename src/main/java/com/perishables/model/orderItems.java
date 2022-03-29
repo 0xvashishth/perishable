@@ -20,7 +20,7 @@ public class orderItems {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private orders orders;
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id", unique = true)
+	@JoinColumn(name = "p_id", referencedColumnName="p_id", unique = true)
 	private Product product;
 	private int quantity;
 	public Long getId() {

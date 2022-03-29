@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -78,7 +79,6 @@ public class CheckoutController {
 			
 			List<orderItems> objects = new ArrayList<orderItems>();
 			
-			mv.setViewName("billpage");
 			HashMap<Long, Integer> mpcart = (HashMap<Long, Integer>) session.getAttribute("cart");
 			
 			Iterator it = mpcart.entrySet().iterator();
@@ -94,6 +94,15 @@ public class CheckoutController {
 		    }
 			String s=null, t=null;
 			Set<Perishables> plist = pDao.filter(s, t, 100);
+			
+			Cookie[] cookies = request.getCookies();
+			for(int i=0; i < cookies.length; i++)
+				if(cookies[i].getName().equals("" + c1.getId()))
+					cookies[i].setMaxAge(0);
+			session.removeAttribute("cart");
+
+			
+			mv.setViewName("redirect:/orders/viewOrder?id=" + o1.getOrder_id());
 			mv.addObject("pList", plist);
 			
 		}
