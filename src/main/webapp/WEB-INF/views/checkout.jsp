@@ -124,8 +124,6 @@
 
 <section class="d-none" style="background-color: transparent; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; color:#aaa; font-size:12px; padding: 0; align-items: center; display: flex;"><a href="https://mobirise.site/r" style="flex: 1 1; visibility: hidden; height: 3rem; padding-left: 1rem;"></a><p style="visibility: hidden; flex: 0 0 auto; margin:0; padding-right:1rem;"><a href="https://mobirise.site/f" style="visibility: hidden; color:#aaa;"></a></p></section><script src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="/assets/parallax/jarallax.js"></script>  <script src="/assets/smoothscroll/smooth-scroll.js"></script>  <script src="/assets/ytplayer/index.js"></script>  <script src="/assets/dropdown/js/navbar-dropdown.js"></script>  <script src="/assets/theme/js/script.js"></script>  <script src="/assets/formoid/formoid.min.js"></script>  
   
-  </body>
-  
   <script>
   		let nextBtn = document.getElementById("form-btn");	
   		let prevBtn = document.getElementById("confirm-btn");
@@ -146,4 +144,5 @@
   			form1.submit();
   		});
   </script>
+</body>
 </html>
