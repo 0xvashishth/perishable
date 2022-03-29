@@ -4,7 +4,7 @@
 	}
 </style>
 
-<section data-bs-version="5.1" class="menu menu1 cid-sYexKegmMS" once="menu" id="menu1-0">
+<section data-bs-version="5.1" class="menu menu1 cid-sYexKegmMS bg-transparent" once="menu" id="menu1-0">
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         <div class="container-fluid">
             <div class="navbar-brand">
