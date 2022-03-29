@@ -5,8 +5,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +64,40 @@ public class CustomerController {
 			mv.addObject("msg", "Logged in successfully!");
 			HttpSession session = request.getSession();
 			session.setAttribute("user", c);		
+			
+			Cookie[] cookies = request.getCookies();
+			if(cookies != null) {
+				Cookie cookie = null;
+				for(int i=0; i < cookies.length; i++) {
+					if(cookies[i].getName().equals("" + c.getId())) {
+						cookie = cookies[i];
+						break;
+					}
+				}
+				
+				if(cookie != null) {
+					HashMap<Long, Integer> mp = new HashMap<Long, Integer>();
+					
+					String[] pairs = cookie.getValue().split(":");
+					for(int i=0; i < pairs.length; i++) {
+						String pId = pairs[i].split("-")[0];
+						String quan = pairs[i].split("-")[1];
+												
+						try {
+							Long.valueOf(pId);
+							Integer.valueOf(quan);
+						}
+						catch(Exception e) {
+							continue;
+						}
+						
+						mp.put(Long.valueOf(pId), Integer.valueOf(quan));
+					}
+					
+					session.setAttribute("cart", mp);
+				}
+			}
+			
 			mv.setViewName("redirect:/");
 		} else {
 			mv.addObject("msg", "Password is incorrect!");
@@ -147,8 +185,23 @@ public class CustomerController {
 	}
 	
 	@RequestMapping("/logout")
-	public ModelAndView logoutuser(HttpServletRequest request) {
+	public ModelAndView logoutuser(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		Customer cust = (Customer)session.getAttribute("user");
+		if(session.getAttribute("cart") != null) {
+			HashMap<Long, Integer> mp = (HashMap<Long, Integer>)session.getAttribute("cart");
+			if(!mp.isEmpty()) {
+				Cookie c = new Cookie("" + cust.getId(), "");
+				for(Map.Entry<Long, Integer> entry: mp.entrySet()) {
+					c.setValue(c.getValue() + entry.getKey() + "-" + entry.getValue() + ":");
+				}
+				c.setMaxAge(30*24*3600);
+				response.addCookie(c);
+			}
+		}
+		
 		request.getSession().invalidate();
 		mv.setViewName("redirect:/");
 		return mv;
