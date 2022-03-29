@@ -181,7 +181,7 @@
     				console.log(data);
     			};
     			req.open("GET", "/cart/removeitem?id=" + x[i].id);
-    			req.send();
+    			req.send(); 
     			
     			gtotal.innerHTML = parseFloat(gtotal.textContent)-parseFloat(dataprice[i].textContent);
     			console.log(parseFloat(dataprice[i].textContent));
