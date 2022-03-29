@@ -45,7 +45,7 @@ document.getElementById("loginlogout").innerHTML = "Register"
     </div>
     <section data-bs-version="5.1" class="slider4 mbr-embla cid-t1g1xJyXGa" id="slider4-s">
     
- 
+ <% double G_total = 0; %>
         <div class="position-relative text-center">
     <div class="embla mt-4" data-skip-snaps="true" data-align="center" data-contain-scroll="trimSnaps" data-loop="true">
             <div class="embla__viewport container-fluid">
@@ -57,7 +57,7 @@ document.getElementById("loginlogout").innerHTML = "Register"
                     			if(lstcart.containsKey(p.getId())){
                     		%>
                     		
-                    <div class="embla__slide slider-image item" style="margin-left: 1rem; margin-right: 1rem;">
+                    <div class="itemwhole embla__slide slider-image item" style="margin-left: 1rem; margin-right: 1rem;">
                         <div class="slide-content">
                             <div class="item-wrapper">
                                 <div class="item-img">
@@ -67,12 +67,14 @@ document.getElementById("loginlogout").innerHTML = "Register"
                             <div class="item-content">
                                 <h5 class="item-title mbr-fonts-style display-7"><strong><%= p.getName() %></strong></h5>
                                 
-                                <p style="display: inline" class="mbr-text mbr-fonts-style mt-3 display-7">Total Quantity : <button id="decrease-<%=p.getId() %>" class="cart-btn- btn-primary">-</button><div class="datapm" style="display: inline"><%=lstcart.get(p.getId()) %></div><button id="increase-<%=p.getId() %>" class="cart-btn+ btn-primary">+</button></p>
+                               <p style="display: inline" class="mbr-text mbr-fonts-style mt-3 display-7">Total Quantity : <button id="decrease-<%=p.getId() %>" class="cart-btn- btn-primary">-</button><div class="datapm" style="display: inline"><%=lstcart.get(p.getId()) %></div><button id="increase-<%=p.getId() %>" class="cart-btn+ btn-primary">+</button></p>
+                               <p style="display: inline" class="mbr-text mbr-fonts-style mt-3 display-7">Total Price : <div class="dataprice" style="display: inline"> <%= p.getPrice() * (1 - (p.getDiscount() / 100.0)) * lstcart.get(p.getId()) %> <% G_total = G_total + p.getPrice() * (1 - (p.getDiscount() / 100.0)) * lstcart.get(p.getId()); %> </div> </p>
+                               
                                 <div class="position-absolute bg-warning d-inline-block px-2" style="border-radius: 0px 0px 100px 0px; top: 0; left: 0;"> 
 								<% if(p.getDiscount() != 0) { %>
-								<p class="text-start text-secondary m-2"><strike>Rs. <%= p.getPrice() %></strike><span class="text-primary"> Rs.<%= p.getPrice() * (1 - (p.getDiscount() / 100.0)) %></span></p>
+								<p style="display: inline" class="text-start text-secondary m-2"><strike>Rs. <%= p.getPrice() %></strike><span class="text-primary"> Rs.<div class="takenprice" style="display: inline"><%= p.getPrice() * (1 - (p.getDiscount() / 100.0)) %></div></span></p>
 								<% } else { %>
-								<p class="text-start text-primary m-2">Rs. <%= p.getPrice() %></p>
+								<p style="display: inline" class="text-start text-primary m-2">Rs. <div class="takenprice" style="display: inline"><%= p.getPrice() %></div></p>
 								<% } %>
 								</div> 
 								
@@ -84,8 +86,8 @@ document.getElementById("loginlogout").innerHTML = "Register"
                             <hr/>
                             
                       
-                            <button id="normal-<%= p.getId() %>" class="cart-btn btn btn-secondary item-btn display-7 float-end" style="border-radius: 100px;" target="_blank">
-                            	<span class="mobi-mbri mobi-mbri-cart-add mbr-iconfont mbr-iconfont-btn"></span>Remove From Cart&nbsp;
+                            <button id="normal-<%= p.getId() %>" class="cart-btnremove btn btn-secondary item-btn display-7 float-end" style="border-radius: 100px;" target="_blank">
+                            	<span class="cart-btnremove mobi-mbri mobi-mbri-cart-add mbr-iconfont mbr-iconfont-btn"></span>Remove From Cart&nbsp;
                             </button>
                             
                             </div>
@@ -93,6 +95,7 @@ document.getElementById("loginlogout").innerHTML = "Register"
                     </div>
                 
                     <% }}} %>
+                    
                 </div>
     </div>
     <button class="embla__button embla__button--prev">
@@ -103,8 +106,9 @@ document.getElementById("loginlogout").innerHTML = "Register"
                 <span class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont" aria-hidden="true"></span>
                 <span class="sr-only visually-hidden visually-hidden">Next</span>
             </button>
-    </div></div></section>
-	
+    </div></div>
+    </section>
+	    <h3 style="display: inline">Grand Total : <div style="display: inline" id="gtotal"> <%= G_total %> </div> </h3>
 </section>
 
 <%@include file="/WEB-INF/views/includes/footer.jsp" %>
@@ -115,6 +119,9 @@ document.getElementById("loginlogout").innerHTML = "Register"
     	let xplus = document.getElementsByClassName("cart-btn+");
     	let xminus = document.getElementsByClassName("cart-btn-");
     	let datapm = document.getElementsByClassName("datapm");
+    	let dataprice = document.getElementsByClassName("dataprice");
+    	let takenprice = document.getElementsByClassName("takenprice");
+    	let gtotal = document.getElementById("gtotal");
     	for(let i=0; i < xplus.length; i++) {
     		xplus[i].addEventListener("click", () => {
     			req = new XMLHttpRequest();
@@ -123,7 +130,11 @@ document.getElementById("loginlogout").innerHTML = "Register"
     			};
     			req.open("GET", "/cart/addmore?id=" + xplus[i].id);
     			req.send();
-    			datapm[i].innerHTML = parseInt(datapm[i].textContent)+1;
+    			
+    			datapm[i].innerHTML = parseFloat(datapm[i].textContent)+1;
+    			dataprice[i].innerHTML = parseFloat(dataprice[i].textContent)+parseFloat(takenprice[i].textContent);
+    			gtotal.innerHTML = parseFloat(gtotal.textContent)+parseFloat(takenprice[i].textContent);
+    			
     		});
     	}
     	for(let i=0; i < xminus.length; i++) {
@@ -135,7 +146,32 @@ document.getElementById("loginlogout").innerHTML = "Register"
     			};
     			req.open("GET", "/cart/removemore?id=" + xminus[i].id);
     			req.send();
-    			datapm[i].innerHTML = parseInt(datapm[i].textContent)-1;
+    			datapm[i].innerHTML = parseFloat(datapm[i].textContent)-1;
+    			dataprice[i].innerHTML = parseFloat(dataprice[i].textContent)-parseFloat(takenprice[i].textContent);
+    			gtotal.innerHTML = parseFloat(gtotal.textContent)-parseFloat(takenprice[i].textContent);
+    			
+    		});
+    	}
+    	let x = document.getElementsByClassName("cart-btnremove");
+    	let y = document.getElementsByClassName("itemwhole");
+    	for(let i=0; i < x.length; i++) {
+    		x[i].addEventListener("click", () => {
+    			x[i].disabled = true;
+    			x[i].classList.remove("btn-primary");
+    			x[i].classList.add("btn-muted");
+    			x[i].innerHTML = `<span class="text-dark">Removed</span><span class="mobi-mbri mobi-mbri-success mbr-iconfont text-dark mbr-iconfont-btn"></span>`;
+    		
+    			req = new XMLHttpRequest();
+    			req.onload = function() {
+    				const data = req.responseText;
+    				console.log(data);
+    			};
+    			req.open("GET", "/cart/removeitem?id=" + x[i].id);
+    			req.send();
+    			
+    			gtotal.innerHTML = parseFloat(gtotal.textContent)-parseFloat(dataprice[i].textContent);
+    			console.log(parseFloat(dataprice[i].textContent));
+    			console.log("Removed");
     		});
     	}
     </script>

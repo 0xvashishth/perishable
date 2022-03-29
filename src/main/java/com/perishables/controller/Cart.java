@@ -64,7 +64,6 @@ public class Cart {
 		if(id2 != null) {
 			@SuppressWarnings("unchecked")
 			HashMap<Long, Integer> mpcart = (HashMap<Long, Integer>) session.getAttribute("cart");
-			Iterator<Long> it = mpcart.keySet().iterator();
 			mpcart.replace(id2,(mpcart.get(id2)+1));
 			session.setAttribute("cart", mpcart);
 		}
@@ -88,8 +87,31 @@ public class Cart {
 		if(id2 != null) {
 			@SuppressWarnings("unchecked")
 			HashMap<Long, Integer> mpcart = (HashMap<Long, Integer>) session.getAttribute("cart");
-			Iterator<Long> it = mpcart.keySet().iterator();
 			mpcart.replace(id2,(mpcart.get(id2)-1));
+			session.setAttribute("cart", mpcart);
+		}
+		
+		return "Done";
+	}
+	
+	@SuppressWarnings("unlikely-arg-type")
+	@RequestMapping("/removeitem")
+	@ResponseBody
+	public String removeitem(HttpServletRequest request, @RequestParam("id") String id) {
+		String tokens[] = id.strip().split("-");
+		id = tokens[tokens.length - 1];
+		Long id2 = null;
+		try {
+			id2 = Long.valueOf(id);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		HttpSession session = request.getSession();
+		if(id2 != null) {
+			@SuppressWarnings("unchecked")
+			HashMap<Long, Integer> mpcart = (HashMap<Long, Integer>) session.getAttribute("cart");
+			Integer returned_value = mpcart.remove(id2);
+			System.out.println("Removed " + returned_value);
 			session.setAttribute("cart", mpcart);
 		}
 		
