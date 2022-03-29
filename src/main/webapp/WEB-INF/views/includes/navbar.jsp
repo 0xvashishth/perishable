@@ -26,12 +26,12 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item dropdown"><a class="nav-link link text-white dropdown-toggle display-4" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="true">Shop</a>
 	                <div class="dropdown-menu" aria-labelledby="dropdown-undefined">
-		                <a class="text-white dropdown-item display-4" href="/shop/">Fruits</a>
-		                <a class="text-white show dropdown-item display-4" href="/shop/">Vegetables</a>
-		                <a class="text-white show dropdown-item display-4" href="/shop/">Meat</a>
-		                <a class="text-white show dropdown-item display-4" href="/shop/">Dairy</a>
-         				<a class="text-white show dropdown-item display-4" href="/shop/">Oil</a>
-   		                <a class="text-white show dropdown-item display-4" href="/shop/">All essentials</a>
+		                <a class="text-white dropdown-item display-4" href="/shop/?p_type=Fruits">Fruits</a>
+		                <a class="text-white show dropdown-item display-4" href="/shop/?p_type=Vegetables">Vegetables</a>
+		                <a class="text-white show dropdown-item display-4" href="/shop/?p_type=Meat">Meat</a>
+		                <a class="text-white show dropdown-item display-4" href="/shop/?p_type=Dairy">Dairy</a>
+         				<a class="text-white show dropdown-item display-4" href="/shop/?p_type=Oil">Oil</a>
+   		                <a class="text-white show dropdown-item display-4" href="/shop/?p_type=All">All essentials</a>
 	                </div></li>
                     <li class="nav-item"><a class="nav-link link text-white show display-4" href="/cart/show" aria-expanded="false">Cart</a></li>
                     <li class="nav-item"><a class="nav-link link text-white display-4" href="https://mobiri.se">Contact</a>

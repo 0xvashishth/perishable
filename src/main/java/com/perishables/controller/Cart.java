@@ -123,7 +123,7 @@ public class Cart {
 	public ModelAndView showLoginForm(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
-		if(session.getAttribute("customer") != null)
+		if(session.getAttribute("user") == null)
 			mv.setViewName("redirect:/");
 		else {
 			mv.setViewName("cart");
