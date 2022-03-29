@@ -20,7 +20,14 @@ public class orders {
 	private double total_price;
 	private Date order_date;
 	private String balanceStatus;
+	private String deliveryAddress;
 	
+	public String getDeliveryAddress() {
+		return deliveryAddress;
+	}
+	public void setDeliveryAddress(String deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
+	}
 	public Long getOrder_id() {
 		return order_id;
 	}
@@ -51,12 +58,16 @@ public class orders {
 	public void setBalanceStatus(String balanceStatus) {
 		this.balanceStatus = balanceStatus;
 	}
-	public orders(Long order_id, Customer customer, double total_price, Date order_date, String balanceStatus) {
+	
+	public orders(Long order_id, Customer customer, double total_price, Date order_date, String balanceStatus,
+			String deliveryAddress) {
 		super();
 		this.order_id = order_id;
 		this.customer = customer;
 		this.total_price = total_price;
 		this.order_date = order_date;
 		this.balanceStatus = balanceStatus;
+		this.deliveryAddress = deliveryAddress;
 	}
+
 }
