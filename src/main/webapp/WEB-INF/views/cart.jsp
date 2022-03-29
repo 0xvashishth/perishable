@@ -26,92 +26,88 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
   <link rel="preload" as="style" href="${pageContext.request.contextPath}/assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="${pageContext.request.contextPath}/assets/mobirise/css/mbr-additional.css" type="text/css">
 </head>
+
+<style>
+	body {
+		background-image: url("/assets/images/features4.jpg");
+	}
+</style>
+
 <body>
   
 <%@include file="/WEB-INF/views/includes/navbar.jsp" %>
-<script type="text/javascript">
-document.getElementById("loginlogout").innerHTML = "Register"
-    document.getElementById("loginlogout").href = "/customer/register/show"
-</script>
+
 <div class="my-5">&nbsp;</div>
-<section data-bs-version="5.1" class="content4 my-5 container cid-sZRVizn1Ss border border-1 p-md-5 p-sm-3 p-2" id="content4-i">
-    <div class="container">
+<section data-bs-version="5.1" class="content4 my-5 container -fluid cid-sZRVizn1Ss border border-1 p-md-5 p-sm-3 p-2" id="content4-i">
+    <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="title col-md-12 col-lg-10">
                 <h3 class="mbr-section-title mbr-fonts-style align-center mb-4 display-2">
                     <strong>Your Cart Details</strong></h3>
+                     <% double G_total = 0; %>
             </div>
         </div>
     </div>
-    <section data-bs-version="5.1" class="slider4 mbr-embla cid-t1g1xJyXGa" id="slider4-s">
     
- <% double G_total = 0; %>
+    <button class="btn btn-primary d-block mx-auto" style="border-radius: 100px;">Proceed to checkout</button>
+    
+    <section data-bs-version="5.1" class="slider4 mbr-embla cid-t1g1xJyXGa" id="slider4-s"> 
         <div class="position-relative text-center">
-    <div class="embla mt-4" data-skip-snaps="true" data-align="center" data-contain-scroll="trimSnaps" data-loop="true">
-            <div class="embla__viewport container-fluid">
-    <div class="embla__container">
+    		<div class="container-fluid">
+            <div>
+    			<div class="row justify-content-center">
                     <% Set<Perishables> products = (Set<Perishables>)request.getAttribute("pList"); 
                     	if(!products.isEmpty()) {
                     		HashMap<Long,Integer> lstcart = (HashMap<Long, Integer>)session.getAttribute("cart");
+                    		if(lstcart != null) {
                     		for(Perishables p: products) { 
                     			if(lstcart.containsKey(p.getId())){
                     		%>
-                    		
-                    <div class="itemwhole embla__slide slider-image item" style="margin-left: 1rem; margin-right: 1rem;">
-                        <div class="slide-content">
+
+                    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-3">
+                        <div class="slide-content border border-2">
+                        	<div class="item-header">
+                               <button id="normal-<%= p.getId() %>" style="border-radius: 50%; padding: 5px;" class="cart-btnremove btn item-btn float-end"><span class="mobi-mbri mobi-mbri-trash text-secondary float-end mbr-iconfont mbr-iconfont-btn"></span></button>
+                        	</div>
                             <div class="item-wrapper">
                                 <div class="item-img">
-                                    <img src="/products/<%= p.getId() %>.png" style="height: 300px;">
+                                    <img src="/products/<%= p.getId() %>.png" style="height: 200px;">
                                 </div>
                             </div>
                             <div class="item-content">
                                 <h5 class="item-title mbr-fonts-style display-7"><strong><%= p.getName() %></strong></h5>
                                 
-                               <p style="display: inline" class="mbr-text mbr-fonts-style mt-3 display-7">Total Quantity : <button id="decrease-<%=p.getId() %>" class="cart-btn- btn-primary">-</button><div class="datapm" style="display: inline"><%=lstcart.get(p.getId()) %></div><button id="increase-<%=p.getId() %>" class="cart-btn+ btn-primary">+</button></p>
+                               <p style="display: inline" class="mbr-text mbr-fonts-style mt-3 display-7"><button id="decrease-<%=p.getId() %>" class="cart-btn- btn border">&minus;</button><div class="datapm" style="display: inline"><%=lstcart.get(p.getId()) %></div><button id="increase-<%=p.getId() %>" class="cart-btn+ border btn">+</button></p>
                                <p style="display: inline" class="mbr-text mbr-fonts-style mt-3 display-7">Total Price : <div class="dataprice" style="display: inline"> <%= p.getPrice() * (1 - (p.getDiscount() / 100.0)) * lstcart.get(p.getId()) %> <% G_total = G_total + p.getPrice() * (1 - (p.getDiscount() / 100.0)) * lstcart.get(p.getId()); %> </div> </p>
                                
-                                <div class="position-absolute bg-warning d-inline-block px-2" style="border-radius: 0px 0px 100px 0px; top: 0; left: 0;"> 
+                                <div class="position-absolute bg-warning d-inline-block px-3 pt-3 pb-0" style="border-radius: 0px 0px 100px 0px; top: -5px; left: 0;"> 
 								<% if(p.getDiscount() != 0) { %>
-								<p style="display: inline" class="text-start text-secondary m-2"><strike>Rs. <%= p.getPrice() %></strike><span class="text-primary"> Rs.<div class="takenprice" style="display: inline"><%= p.getPrice() * (1 - (p.getDiscount() / 100.0)) %></div></span></p>
+								<p style="display: inline" class="text-start text-secondary m-2"><strike>Rs.<%= p.getPrice() %></strike><span class="text-primary"> Rs.<div class="takenprice" style="display: inline"><%= p.getPrice() * (1 - (p.getDiscount() / 100.0)) %></div></span></p>
 								<% } else { %>
-								<p style="display: inline" class="text-start text-primary m-2">Rs. <div class="takenprice" style="display: inline"><%= p.getPrice() %></div></p>
+								<p style="display: inline" class="text-start text-primary m-2">Rs.<div class="takenprice" style="display: inline"><%= p.getPrice() %></div></p>
 								<% } %>
 								</div> 
-								
-								<% if(p.getDiscount() != 0) { %>
-								<span class="discountTag position-absolute text-light bg-secondary border border-danger d-inline-block px-3 py-2" style="border-radius: 0px 0px 100px 100px; top: 0; right: 0;"><%= (int)p.getDiscount() %>% <br> off <br><br/><br/></span>
-								<% } %>
                             </div>
-                            <div class="mbr-section-btn item-footer mt-2">
-                            <hr/>
-                            
-                      
-                            <button id="normal-<%= p.getId() %>" class="cart-btnremove btn btn-secondary item-btn display-7 float-end" style="border-radius: 100px;" target="_blank">
-                            	<span class="cart-btnremove mobi-mbri mobi-mbri-cart-add mbr-iconfont mbr-iconfont-btn"></span>Remove From Cart&nbsp;
-                            </button>
-                            
+                            <div class="mbr-section-btn item-footer mt-2">                            
                             </div>
                         </div>
                     </div>
                 
-                    <% }}} %>
+                    <% }}}} %>
                     
                 </div>
     </div>
-    <button class="embla__button embla__button--prev">
-                <span class="mobi-mbri mobi-mbri-arrow-prev mbr-iconfont" aria-hidden="true"></span>
-                <span class="sr-only visually-hidden visually-hidden">Previous</span>
-            </button>
-            <button class="embla__button embla__button--next">
-                <span class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont" aria-hidden="true"></span>
-                <span class="sr-only visually-hidden visually-hidden">Next</span>
-            </button>
     </div></div>
     </section>
-	    <h3 style="display: inline">Grand Total : <div style="display: inline" id="gtotal"> <%= G_total %> </div> </h3>
+    
+     <h4 class="display-7 border text-muted p-2 text-end" style="display: block">Total = Rs.<div style="display: inline" id="gtotal"> <%= G_total %> </div> </h4>
+    
 </section>
 
 <%@include file="/WEB-INF/views/includes/footer.jsp" %>
+
+<section style="background-color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; color:#aaa; font-size:12px; padding: 0; align-items: center; display: flex;"><a href="https://mobirise.site/c" style="flex: 1 1; height: 3rem; padding-left: 1rem;"></a><p style="flex: 0 0 auto; margin:0; padding-right:1rem;">Website was <a href="https://mobirise.site/g" style="color:#aaa;">designed</a> with Mobirise</p></section><script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="${pageContext.request.contextPath}/assets/smoothscroll/smooth-scroll.js"></script>  <script src="${pageContext.request.contextPath}/assets/ytplayer/index.js"></script>  <script src="${pageContext.request.contextPath}/assets/dropdown/js/navbar-dropdown.js"></script>  <script src="${pageContext.request.contextPath}/assets/embla/embla.min.js"></script>  <script src="${pageContext.request.contextPath}/assets/embla/script.js"></script>  <script src="${pageContext.request.contextPath}/assets/theme/js/script.js"></script>  
+
   
  <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon mbr-arrow-up-icon-cm cm-icon cm-icon-smallarrow-up"></i></a></div>
     <input name="animation" type="hidden">
@@ -139,6 +135,9 @@ document.getElementById("loginlogout").innerHTML = "Register"
     	}
     	for(let i=0; i < xminus.length; i++) {
     		xminus[i].addEventListener("click", () => {
+    			if(Number(datapm[i].textContent - 1) == 0)
+    				return;
+    			
     			req = new XMLHttpRequest();
     			req.onload = function() {
     				const data = req.responseText;
@@ -159,8 +158,8 @@ document.getElementById("loginlogout").innerHTML = "Register"
     			x[i].disabled = true;
     			x[i].classList.remove("btn-primary");
     			x[i].classList.add("btn-muted");
-    			x[i].innerHTML = `<span class="text-dark">Removed</span><span class="mobi-mbri mobi-mbri-success mbr-iconfont text-dark mbr-iconfont-btn"></span>`;
-    		
+				x[i].parentElement.parentElement.parentElement.style.display = "none";
+    			
     			req = new XMLHttpRequest();
     			req.onload = function() {
     				const data = req.responseText;
@@ -172,6 +171,8 @@ document.getElementById("loginlogout").innerHTML = "Register"
     			gtotal.innerHTML = parseFloat(gtotal.textContent)-parseFloat(dataprice[i].textContent);
     			console.log(parseFloat(dataprice[i].textContent));
     			console.log("Removed");
+    			
+    			x[i].remove();
     		});
     	}
     </script>

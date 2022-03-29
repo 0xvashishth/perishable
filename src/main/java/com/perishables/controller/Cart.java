@@ -129,7 +129,6 @@ public class Cart {
 			mv.setViewName("cart");
 			HashMap<Long, Integer> mpcart = (HashMap<Long, Integer>) session.getAttribute("cart");
 			String s=null, t=null;
-			Iterator<Long> it = mpcart.keySet().iterator();
 			Set<Perishables> plist = pDao.filter(s, t, 100);
 			mv.addObject("pList", plist);
 		}
