@@ -116,7 +116,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn text-muted" data-bs-dismiss="modal">Home</button>
-	        <a href="/checkout/bill" type="button" id="form-submit" class="btn btn-primary">Receive My Bill</a>
+	        <a href="submit" type="button" id="form-submit" class="btn btn-primary">Receive My Bill</a>
 	      </div>
 	    </div>
 	  </div>
