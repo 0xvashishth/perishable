@@ -57,6 +57,9 @@ public class CheckoutController {
 	
 	@RequestMapping("submit")
 	public ModelAndView submitcheckout(HttpServletRequest request, @ModelAttribute("customer") Customer c) {
+		if(request.getMethod() == "post") {
+			System.out.println("Post Method");
+		}
 		String address = request.getParameter("checkout_address");
 		
 		ModelAndView mv = new ModelAndView();
