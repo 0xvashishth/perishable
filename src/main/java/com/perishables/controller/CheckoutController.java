@@ -93,7 +93,7 @@ public class CheckoutController {
 		        oi.setQuantity((int) pair.getValue());
 		        oi.setProduct(pDao.getById((Long) pair.getKey()));
 		        oiDao.save(oi);
-		        System.out.println(pair.getKey() + " = " + pair.getValue());
+//		        System.out.println(pair.getKey() + " = " + pair.getValue());
 		    }
 			String s=null, t=null;
 			Set<Perishables> plist = pDao.filter(s, t, 100);
