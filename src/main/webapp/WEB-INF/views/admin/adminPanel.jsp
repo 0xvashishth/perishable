@@ -226,6 +226,41 @@
 			  </div>
 			</div>
 		</div>
+		
+		<div class="card col-12 col-md-6 mx-auto p-0 mt-3 px-3" style="border-radius: 25px; box-sizing:border-box;">
+		  <div class="bg-danger pb-5" alt="...">
+		  	<form class="form my-5 d-block mx-auto">
+		  		<input type="search" placeholder="Search user by email, order id" class="input-control d-block mx-auto w-75 form-control" name="o_string" />
+		  		<input type="submit" class="d-none" value="Search" />
+		  	</form>
+		  </div>
+		  <div class="card-body w-100 mx-auto bg-white" style="transform: translateY(-100px); border-radius: 25px 25px 0px 0px;">
+		    <h5 class="card-title my-3 fw-bold text-center">Orders</h5>
+		    <div class="container">
+		    	<table class="table">
+		    		<tr>
+		    			<th>Order Id</th>
+		    			<th>Id</th>
+		    			<th>Email</th>
+		    			<th>Date</th>		    			
+		    		</tr>
+		    		<%  Set<orders> olist = (Set<orders>)request.getAttribute("oList");
+		    			if(olist != null) {
+		    			for(orders o : olist) { %>
+		    			<tr id="data-<%= o.getOrder_id() %>">
+    						<td><%= o.getOrder_id() %></td>
+    						<td><%= o.getCustomer().getId() %></td>
+    						<td><%= o.getCustomer().getEmail() %></td>
+   							<td><%= o.getOrder_date() %>
+   								<a href="/orders/viewOrder?id=<%= o.getOrder_id() %>"><span class="mobi-mbri px-3 mobi-mbri-preview text-muted float-end mbr-iconfont mbr-iconfont-btn"></span></a>
+   							</td>
+    					</tr>
+   					<% }} %>
+		    	</table>
+		    	</div>
+		    </div>
+		  </div>
+		</div>
 	</div>
 </section>
 
@@ -270,6 +305,10 @@
 	
 	function setProduct(id) {
 		document.getElementById("product_deletion_id").value = id;
+	}
+	
+	function setOrder(id) {
+		document.getElementById("order_deletion_id").value = id;
 	}
 	
 	function hideProductAdder() {

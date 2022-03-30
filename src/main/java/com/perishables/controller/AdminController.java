@@ -17,8 +17,10 @@ import com.perishables.model.Customer;
 import com.perishables.model.Perishables;
 import com.perishables.model.Product;
 import com.perishables.model.User;
+import com.perishables.model.orders;
 import com.perishables.repository.CustomerDao;
 import com.perishables.repository.ProductDao;
+import com.perishables.repository.orderDao;
 
 @Controller
 @RequestMapping("/admin")
@@ -27,9 +29,11 @@ public class AdminController {
 	private CustomerDao cDao;
 	@Autowired
 	private ProductDao pDao;
+	@Autowired
+	private orderDao oDao;
 	
 	@RequestMapping("/dashboard")
-	public ModelAndView dashboard(HttpServletRequest request, @RequestParam("u_string") Optional<String> search, @RequestParam("u_string_p") Optional<String> searchP) {
+	public ModelAndView dashboard(HttpServletRequest request, @RequestParam("u_string") Optional<String> search, @RequestParam("u_string_p") Optional<String> searchP, @RequestParam("o_string") Optional<String> searchO) {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
@@ -56,6 +60,14 @@ public class AdminController {
 			} else {
 				Set<Perishables> pList = pDao.find(null, 25);
 				mv.addObject("pList", pList);
+			}
+			
+			if(searchO.isPresent()) {
+				Set<orders> oList = oDao.find(searchO.get(), 25);
+				mv.addObject("oList", oList);
+			} else {
+				Set<orders> oList = oDao.find(null, 25);
+				mv.addObject("oList", oList);
 			}
 		}
 		return mv;

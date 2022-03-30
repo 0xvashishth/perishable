@@ -60,7 +60,7 @@ public class OrderController {
 		orders order = oDao.getById(oid);
 		List<orderItems> items = oiDao.filter(order);
 		
-		if(u.getId() != order.getCustomer().getId() || order == null) {
+		if((u.getId() != order.getCustomer().getId() && !u.getUserType().equals("Admin")) || order == null) {
 			mv.setViewName("redirect:/");
 			return mv;
 		}
@@ -68,6 +68,23 @@ public class OrderController {
 		mv.addObject("order", order);
 		mv.addObject("items", items);
 		mv.setViewName("billpage");
+		return mv;
+	}
+	
+	@RequestMapping("/delete")
+	public ModelAndView deleteOrder(@RequestParam("id") String id) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/admin/dashboard");
+		
+		Long oid = 0L;
+		try {
+			oid = Long.valueOf(id);
+		} catch(Exception e) {
+			return mv;
+		}
+		
+		oDao.deleteById(oid);
+		
 		return mv;
 	}
 }
