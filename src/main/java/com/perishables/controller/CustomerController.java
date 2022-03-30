@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.perishables.model.Customer;
 import com.perishables.model.User;
+import com.perishables.model.orders;
 import com.perishables.repository.CustomerDao;
 
 @Controller
@@ -221,6 +223,8 @@ public class CustomerController {
 			else {
 				mv.setViewName("userprofile");
 				mv.addObject("customer", session.getAttribute("user"));
+				Set<orders> qset = cDao.getUserOrders(u.getId());
+				session.setAttribute("orderset", qset);
 			}
 			return mv;
 		}

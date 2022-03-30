@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import com.perishables.model.Customer;
 import com.perishables.model.User;
+import com.perishables.model.orders;
 
 @Repository
 public class CustomerDao {
@@ -29,6 +30,23 @@ public class CustomerDao {
 		session.getTransaction().commit();
 		session.close();
 		return id;
+	}
+	
+	@SuppressWarnings("unused")
+	public Set<orders> getUserOrders(Long u_id) {
+		Session session = sf.openSession();
+		session.beginTransaction();
+		@SuppressWarnings({ "rawtypes", "deprecation" })
+		Query query = session.createQuery("FROM com.perishables.model.orders WHERE customer_u_id='" + u_id + "' order by order_date");
+
+		@SuppressWarnings({ "unchecked", "deprecation" })
+		List<orders> qo = query.list();
+		
+		Set<orders> qset = new HashSet<orders>();
+		for(orders c: qo)
+			qset.add(c);
+		
+		return qset;
 	}
 	
 	public User login(String email) {

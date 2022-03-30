@@ -1,3 +1,6 @@
+<%@page import="java.util.List, java.util.Iterator, java.util.Set, java.util.HashMap, com.perishables.model.orders" %>
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@page import="com.perishables.model.User" %>
@@ -140,26 +143,38 @@
               </div>
 
               <div class="row gutters-sm">
-                <div class="col-sm-6 mb-3">
+              <h4>Previous Orders History</h4>
+                <div class=" mb-5">
                   <div class="card h-100 shadow p-3 mb-5 bg-white rounded">
                     <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3">Records&nbsp;<a href="#">Link</a></h6>
-                      
+                    <table class="table border bg-light">
+                    <tbody>
+                    <tr>
+                    <th>Order_Id</th>
+                    <th>Order_Date</th>
+                    <th>Order_Price</th>
+                    <th>Link</th>
+                    </tr>
+                    <% 
+					Set<orders> qset = (Set<orders>)session.getAttribute("orderset");
+					if(!qset.isEmpty()) {
+	               		for(orders o: qset) { 
+	               			
+	               		%>
+                    <tr>
+                    <td><%= o.getOrder_id() %></td>
+                    <td><%= o.getOrder_date() %></td>
+                    <td><%= o.getTotal_price() %></td>
+                    <td><a href="#">Link</a></td>
+                    </tr>
+                    <%}
+	               	} 
+	               	%>
+                    </tbody>
+                    </table>
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-6 mb-3">
-                  <div class="card h-100 shadow p-3 mb-5 bg-white rounded">
-                    <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3">CustomerData&nbsp;<a href="#">Link</a></h6>
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
-
             </div>
           </div>
 
