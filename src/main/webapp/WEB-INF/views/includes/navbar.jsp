@@ -34,7 +34,7 @@
    		                <a class="text-white show dropdown-item display-4" href="/shop/?p_type=All">All essentials</a>
 	                </div></li>
                     <li class="nav-item"><a class="nav-link link text-white show display-4" href="/cart/show" aria-expanded="false">Cart</a></li>
-                    <li class="nav-item"><a class="nav-link link text-white display-4" href="https://mobiri.se">Contact</a>
+                    <li class="nav-item"><a class="nav-link link text-white display-4" href="#footer6-h">Contact</a>
                    </li></ul>
 
                 ${user.userType == "Admin" ? '<div class="navbar-buttons mbr-section-btn"><a class="nav-link link text-white show display-4" href="/admin/dashboard">Admin Panel</a></div>' : ""}

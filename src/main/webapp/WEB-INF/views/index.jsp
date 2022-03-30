@@ -42,7 +42,7 @@
                 <h1 class="mbr-section-title mbr-fonts-style mbr-white mb-3 display-1"><strong>Enormous Entrepot</strong></h1>
                 <h2 class="mbr-section-subtitle mbr-fonts-style mbr-white mb-3 display-5">Fruits? Vegetables? Meat? Yeah, its all here!</h2>
                 
-                <div class="mbr-section-btn mt-3"><a class="btn btn-success display-4" href="https://mobiri.se"><span class="mobi-mbri mobi-mbri-shopping-bag mbr-iconfont mbr-iconfont-btn"></span>Start Shopping!</a></div>
+                <div class="mbr-section-btn mt-3"><a class="btn btn-success display-4" href="/shop/"><span class="mobi-mbri mobi-mbri-shopping-bag mbr-iconfont mbr-iconfont-btn"></span>Start Shopping!</a></div>
             </div>
         </div>
     </div>
@@ -98,6 +98,7 @@
     </div>
 </section>
 
+<% if(session.getAttribute("user") == null) { %>
 <section data-bs-version="5.1" class="content15 cid-sYlhTC5IYn" id="content15-a">
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -114,6 +115,7 @@
         </div>
     </div>
 </section>
+<% } %>
 
 <section data-bs-version="5.1" class="gallery5 mbr-gallery cid-sYhnBDAeAO" id="gallery5-8">
     
@@ -271,9 +273,6 @@
                         <h6 class="mbr-role mbr-fonts-style align-center mb-3 display-4">
                             <strong>Programmer</strong>
                         </h6>
-                        <p class="card-text mbr-fonts-style align-center display-7">
-                            No special actions required, all sites you make with Mobirise are mobile-friendly.
-                        </p>
                         <div class="social-row display-7">
                             <div class="soc-item">
                                 <a href="https://www.facebook.com/Mobirise/" target="_blank">
@@ -305,9 +304,6 @@
                         <h6 class="mbr-role mbr-fonts-style align-center mb-3 display-4">
                             <strong>Manager</strong>
                         </h6>
-                        <p class="card-text mbr-fonts-style align-center display-7">
-                            Use Mobirise website building software to create multiple sites for your clients.
-                        </p>
                         <div class="social-row display-7">
                             <div class="soc-item">
                                 <a href="https://www.facebook.com/Mobirise/" target="_blank">
@@ -338,9 +334,6 @@
                         <h6 class="mbr-role mbr-fonts-style align-center mb-3 display-4">
                             <strong>Analyst</strong>
                         </h6>
-                        <p class="card-text mbr-fonts-style align-center display-7">
-                            Create multiple pages. Don't forget to set links to your pages after creating them.
-                        </p>
                         <div class="social-row display-7">
                             <div class="soc-item">
                                 <a href="https://www.facebook.com/Mobirise/" target="_blank">
@@ -372,9 +365,6 @@
                         <h6 class="mbr-role mbr-fonts-style align-center mb-3 display-4">
                             <strong>Designer</strong>
                         </h6>
-                        <p class="card-text mbr-fonts-style align-center display-7">
-                            Each theme in the Mobirise site builder contains a set of unique blocks.
-                        </p>
                         <div class="social-row display-7">
                             <div class="soc-item">
                                 <a href="https://www.facebook.com/Mobirise/" target="_blank">

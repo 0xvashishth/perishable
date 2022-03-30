@@ -12,8 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name="PRODUCT")
@@ -30,6 +34,16 @@ public class Product {
 	private String type;
 	private int quantity;
 	
+	@OneToMany(mappedBy="product")
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private List<orderItems> orderItems; 
+	
+	public List<orderItems> getOrderItems() {
+		return orderItems;
+	}
+	public void setOrderItems(List<orderItems> orderItems) {
+		this.orderItems = orderItems;
+	}
 	public Long getId() {
 		return id;
 	}
