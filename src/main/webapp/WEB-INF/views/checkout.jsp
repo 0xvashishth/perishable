@@ -70,7 +70,8 @@
 			<td><%= p.getPrice()%></td>
 			<% if(p.getDiscount() != 0) { %>
 			<td><%= p.getDiscount()%></td>
-			<td><%= p.getPrice() * (1 - (p.getDiscount() / 100.0)) * lstcart.get(p.getId()) %></td>
+			<% float temp = p.getPrice() * (1 - (p.getDiscount() / 100)) * lstcart.get(p.getId()); %>
+			<td><%= (int)temp %></td>
 			<%G_total = G_total + p.getPrice() * (1 - (p.getDiscount() / 100.0)) * lstcart.get(p.getId());}else{%>
 			<td>0</td>
 			<td><%= p.getPrice() * lstcart.get(p.getId()) %></td>
@@ -81,7 +82,7 @@
 	
 	<div class="text-end"><mark>
 	<b>Grand Total :-</b>
-	<%= G_total %>
+	<%= (int)G_total %>
 	<% session.setAttribute("G_total", G_total); %>
 	</mark>
 	<br>

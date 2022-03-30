@@ -256,7 +256,13 @@ public class CustomerController {
 		c.setUserType("Customer");
 		
 //		If the details are valid, then create the user account
-		cDao.save(c);
+		Long id1 = cDao.save(c);
+		if(id1 == -1L) {
+			mv.setViewName("redirect:/customer/register");
+			return mv;
+		}
+			
+		
 //		Start the user session
 		HttpSession session = request.getSession();
 		session.setAttribute("user", c);
