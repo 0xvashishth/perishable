@@ -1,5 +1,6 @@
 package com.perishables.model;
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -7,8 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name="ORDERS")
@@ -22,6 +27,10 @@ public class orders {
 	private Date order_date;
 	private String balanceStatus;
 	private String deliveryAddress;
+	
+	@OneToMany(mappedBy="orders")
+	@OnDelete(action=OnDeleteAction.CASCADE)
+	private List<orderItems> orderItems;
 	
 	public String getDeliveryAddress() {
 		return deliveryAddress;

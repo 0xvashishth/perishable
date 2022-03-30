@@ -101,7 +101,7 @@ public class CheckoutController {
 			Cookie[] cookies = request.getCookies();
 			for(int i=0; i < cookies.length; i++)
 				if(cookies[i].getName().equals("" + c1.getId()))
-					cookies[i].setMaxAge(0);
+					cookies[i].setMaxAge(-3600);
 			session.removeAttribute("cart");
 
 			
