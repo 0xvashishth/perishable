@@ -44,8 +44,11 @@ public class OrderController {
 		ModelAndView mv = new ModelAndView();
 		
 		User u = (User)request.getSession().getAttribute("user");
+		
+		System.out.println("id " + id);
 		if(u == null) {
 			mv.setViewName("redirect:/");
+			
 			return mv;
 		}
 		
@@ -54,14 +57,17 @@ public class OrderController {
 			oid = Long.valueOf(id);
 		} catch(Exception e) {
 			mv.setViewName("redirect:/");
+			
 			return mv;
 		}
 		
 		orders order = oDao.getById(oid);
+		
 		List<orderItems> items = oiDao.filter(order);
 		
 		if(u.getId() != order.getCustomer().getId()) {
 			mv.setViewName("redirect:/");
+			
 			return mv;
 		}
 		
