@@ -95,13 +95,13 @@
                                 <h5 class="item-title mbr-fonts-style display-7"><strong><%= p.getName() %></strong></h5>
                                 
                                <p style="display: inline" class="mbr-text mbr-fonts-style mt-3 display-7"><button id="decrease-<%=p.getId() %>" class="cart-btn- btn border">&minus;</button><div class="datapm" style="display: inline"><%=lstcart.get(p.getId()) %></div><button id="increase-<%=p.getId() %>" class="cart-btn+ border btn">+</button></p>
-                               <p style="display: inline" class="mbr-text mbr-fonts-style mt-3 display-7">Total Price : <div class="dataprice" style="display: inline"> <%= p.getPrice() * (1 - (p.getDiscount() / 100.0)) * lstcart.get(p.getId()) %> <% G_total = G_total + p.getPrice() * (1 - (p.getDiscount() / 100.0)) * lstcart.get(p.getId()); %> </div> </p>
+                               <p style="display: inline" class="mbr-text mbr-fonts-style mt-3 display-7">Total Price : <div class="dataprice" style="display: inline"> <%= (int)(p.getPrice() * (1 - (p.getDiscount() / 100.0)) * lstcart.get(p.getId())) %> <% G_total = G_total + p.getPrice() * (1 - (p.getDiscount() / 100.0)) * lstcart.get(p.getId()); %> </div> </p>
                                
                                 <div class="position-absolute bg-warning d-inline-block px-3 pt-3 pb-0" style="border-radius: 0px 0px 100px 0px; top: -5px; left: 0;"> 
 								<% if(p.getDiscount() != 0) { %>
-								<p style="display: inline" class="text-start text-secondary m-2"><strike>Rs.<%= p.getPrice() %></strike><span class="text-primary"> Rs.<div class="takenprice" style="display: inline"><%= p.getPrice() * (1 - (p.getDiscount() / 100.0)) %></div></span></p>
+								<p style="display: inline" class="text-start text-secondary m-2"><strike>Rs.<%= (int)p.getPrice() %></strike><span class="text-primary"> Rs.<div class="takenprice" style="display: inline"><%= (int)(p.getPrice() * (1 - (p.getDiscount() / 100.0))) %></div></span></p>
 								<% } else { %>
-								<p style="display: inline" class="text-start text-primary m-2">Rs.<div class="takenprice" style="display: inline"><%= p.getPrice() %></div></p>
+								<p style="display: inline" class="text-start text-primary m-2">Rs.<div class="takenprice" style="display: inline"><%= (int)p.getPrice() %></div></p>
 								<% } %>
 								</div> 
                             </div>
@@ -117,7 +117,7 @@
     </div></div>
     </section>
     
-     <h4 class="display-7 border text-muted p-2 text-end" style="display: block">Total = Rs.<div style="display: inline" id="gtotal"> <%= G_total %> </div> </h4>
+     <h4 class="display-7 border text-muted p-2 text-end" style="display: block">Total = Rs.<div style="display: inline" id="gtotal"> <%= (int)G_total %> </div> </h4>
     
 </section>
 

@@ -26,7 +26,12 @@ public class CustomerDao {
 	public Long save(User c) {
 		Session session = sf.openSession();
 		session.beginTransaction();
-		Long id = (Long)session.save(c);
+		Long id = 0L;
+		try {
+			id = (Long)session.save(c);
+		} catch(Throwable e) {
+			return -1L;
+		}
 		session.getTransaction().commit();
 		session.close();
 		return id;
