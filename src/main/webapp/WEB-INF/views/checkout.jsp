@@ -88,7 +88,7 @@
 	</div>
 	
 	<div class="text-end mt-5">
-		<button class="btn text-secondary" style="border-radius: 100px;">Back to cart</button>
+		<button class="btn text-secondary" onclick="window.location.href='/cart/show'" style="border-radius: 100px;">Back to cart</button>
 		<button id="form-btn" class="btn btn-primary" style="border-radius: 100px;">Confirm</button>
 	</div>
 </section>
