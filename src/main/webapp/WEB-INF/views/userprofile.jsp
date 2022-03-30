@@ -165,7 +165,7 @@
                     <td><%= o.getOrder_id() %></td>
                     <td><%= o.getOrder_date() %></td>
                     <td><%= o.getTotal_price() %></td>
-                    <td><a href="#">Link</a></td>
+                    <td><a href="/orders/viewOrder?id=<%= o.getOrder_id() %>">O#<%= o.getOrder_id() %></a></td>
                     </tr>
                     <%}
 	               	} 
