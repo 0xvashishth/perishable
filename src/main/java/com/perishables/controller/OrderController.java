@@ -65,7 +65,7 @@ public class OrderController {
 		
 		List<orderItems> items = oiDao.filter(order);
 		
-		if(u.getId() != order.getCustomer().getId()) {
+		if(u.getId() != order.getCustomer().getId() || order == null) {
 			mv.setViewName("redirect:/");
 			
 			return mv;
