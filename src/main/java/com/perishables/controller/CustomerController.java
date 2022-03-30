@@ -1,6 +1,15 @@
 package com.perishables.controller;
 
 import java.io.File;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import javax.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,12 +18,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.core.ApplicationContext;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,14 +37,17 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.perishables.bean.Mail;
 import com.perishables.model.Customer;
 import com.perishables.model.User;
 import com.perishables.model.orders;
 import com.perishables.repository.CustomerDao;
+import com.perishables.service.MailService;
+
 
 @Controller
 @RequestMapping("/customer")
-public class CustomerController {
+public class CustomerController{
 	@Autowired
 	private CustomerDao cDao;
 	public static String uploadDirectory;
@@ -39,6 +55,20 @@ public class CustomerController {
 	{
 		uploadDirectory = System.getProperty("user.dir")+"/src/main/resources/static/users";
 	}
+	
+//	private String host;
+//    private String port;
+//    private String user;
+//    private String pass;
+// 
+//    public void init() {
+//        // reads SMTP server setting from web.xml file
+//        ServletContext context = getServletContext();
+//        host = context.getInitParameter("host");
+//        port = context.getInitParameter("port");
+//        user = context.getInitParameter("user");
+//        pass = context.getInitParameter("pass");
+//    }
 	
 	@RequestMapping("/login/show")
 	public ModelAndView showLoginForm(HttpServletRequest request) {
@@ -297,10 +327,24 @@ public class CustomerController {
 				e.printStackTrace();
 			}
 		}
+		
+//		String subject = "Recover Password | Perishable System";
+////      
+//      String content = "Your Passsword : ";
+//
+//      String resultMessage = "";
+//
+//    
+//      try {
+//          EmailUtility.sendEmail(host, port, user, pass, "vashishthchaudhary48@gmail.com", subject,
+//                  content);
+//          System.out.println("The e-mail was sent successfully");
+//      } catch (Exception ex) {
+//          ex.printStackTrace();
+//          System.out.println("There were an error: " + ex.getMessage());
+//      }
+      
 //		model.addAttribute("msg","Successfully files " + fileNames.toString());
-		
-		
-
 		mv.addObject("customer", c);
 		mv.setViewName("redirect:/");
 		return mv;
