@@ -4,8 +4,8 @@
 
 ### Language Used :-
 
-![java](https://img.shields.io/badge/java-blue?style=for-the-badge&logo=java&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot%20-%231572B6.svg?&style=for-the-badge&logo=spring%20boot&logoColor=white)
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
+![Spring](https://img.shields.io/badge/spring%20boot-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 ![jsp](https://img.shields.io/badge/jsp-blue?style=for-the-badge&logo=jsp&logoColor=white)
 ![hibernate](https://img.shields.io/badge/hibernate%20-%231572B6.svg?&style=for-the-badge&logo=hibernate&logoColor=white)
 ![HTML](https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white)
