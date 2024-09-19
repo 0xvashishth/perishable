@@ -334,15 +334,6 @@ public class CustomerController{
 //
 //      String resultMessage = "";
 //
-//    
-//      try {
-//          EmailUtility.sendEmail(host, port, user, pass, "vashishthchaudhary48@gmail.com", subject,
-//                  content);
-//          System.out.println("The e-mail was sent successfully");
-//      } catch (Exception ex) {
-//          ex.printStackTrace();
-//          System.out.println("There were an error: " + ex.getMessage());
-//      }
       
 //		model.addAttribute("msg","Successfully files " + fileNames.toString());
 		mv.addObject("customer", c);
