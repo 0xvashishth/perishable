@@ -23,6 +23,6 @@
  
     <context-param>
         <param-name>pass</param-name>
-        <param-value>vurioxlxtzfheorj</param-value>
+        <param-value>App Password</param-value>
     </context-param>
 </web-app>
